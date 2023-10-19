@@ -67,7 +67,7 @@ def obtainVibrationalQuantumNumbers(row):
     
 df = df.parallel_apply(lambda x:obtainVibrationalQuantumNumbers(x), axis=1, result_type="expand")
 df = df.reset_index()
-df["Source"] = pd.DataFrame({"Source": [f"20CaCeBe.{i + 1}" for i in range(len(df))]})
+df["Source"] = pd.DataFrame({"Source": [f"20CaCeBeCa.{i + 1}" for i in range(len(df))]})
 df = df[["Transition", "Uncertainty", "Uncertainty2", 
          "v1’",
          "v2’",
