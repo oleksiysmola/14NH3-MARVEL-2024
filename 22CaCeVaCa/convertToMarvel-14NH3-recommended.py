@@ -12,7 +12,7 @@ df = df.drop("C.1", axis=1)
 # Uncertainty
 print(df["C.3"].max())
 def fixMissingUncertainty(row):
-    if row["C.3"] < 1e-10:
+    if 0 < row["C.3"] < 1e-10:
         columns = row.keys()
         i = -1
         while i >= -30:
@@ -22,6 +22,13 @@ def fixMissingUncertainty(row):
     return row
 
 df = df.parallel_apply(lambda x:fixMissingUncertainty(x), axis=1, result_type="expand")
+
+def removeNullUncertainties(row):
+    if row["C.3"] < 0.00001:
+        row["C.3"] = 0.00001
+    return row
+
+df = df.parallel_apply(lambda x:removeNullUncertainties(x), axis=1, result_type="expand")
 
 df["Uncertainty"] = df["C.3"]
 columns = ["C.2", "C.3", "Uncertainty"] + [f"C.{i}" for i in range(7, 13)] + ["C.15", "C.16", "C.13", "C.18", "C.19"]
