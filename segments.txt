@@ -88,3 +88,6 @@ MAGIC_84UrD'cRaPa cm-1
 10PeHa 	cm-1
 99BePeMe 	cm-1
 15BaYuTeCl cm-1
+21CaCeBeCa cm-1
+22CaCeVaCa cm-1
+22CaCeVaCaa cm-1
