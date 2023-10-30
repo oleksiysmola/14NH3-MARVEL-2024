@@ -91,3 +91,4 @@ MAGIC_84UrD'cRaPa cm-1
 21CaCeBeCa cm-1
 22CaCeVaCa cm-1
 22CaCeVaCaa cm-1
+22HuSuTo cm-1
