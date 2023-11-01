@@ -2,9 +2,15 @@ import pandas as pd
 from pandarallel import pandarallel
 pandarallel.initialize(progress_bar=True)
 
-marvelColumns = ["nu1", "nu2", "nu3", "nu4", "L3", "L4", "J", "K", "inv", "Gamma", "Nb", "Energy", "Uncertainty", "Transitions"]
+marvelColumns = ["nu1", "nu2", "nu3", "nu4", "L3", "L4", "J", "K", "inv", "Gamma", "Nb", "E", "Uncertainty", "Transitions"]
 
 marvelEnergies = pd.read_csv("14NH3-MarvelEnergies-2020.txt", delim_whitespace=True, names=marvelColumns)
+
+def assignMarvelTags(row):
+    row["Tag"] = str(row["J"]) + "-" + str(row["Gamma"]) + "-" + str(row["Nb"])
+    return row
+
+marvelEnergies = marvelEnergies.parallel_apply(lambda x:assignMarvelTags(x), result_type="expand", axis=1)
 
 print(marvelEnergies.head(20).to_string(index=False))
 
@@ -29,3 +35,24 @@ for transitionFile in transitionsFiles:
 
 transitions = transitions[transitions["nu"] > 0]
 print(transitions.head(20).to_string(index=False))
+
+def assignStateTags(row):
+    row["Tag'"] = str(row["J'"]) + "-" + str(row["Gamma'"]) + "-" + str(row["Nb'"])
+    row["Tag\""] = str(row["J\""]) + "-" + str(row["Gamma\""]) + "-" + str(row["Nb\""])
+    return row
+
+transitions = transitions.parallel_apply(lambda x:assignStateTags(x), result_type="expand", axis=1)
+transitions = transitions.sort_values(by=["J'", "Gamma'", "Nb'"])
+
+def computeUpperState(row, marvelEnergies):
+    matchingEnergyLevels = marvelEnergies[marvelEnergies["Tag"] == row["Tag\""]]
+    if len(matchingEnergyLevels) == 1:
+        row["E\""] = matchingEnergyLevels.squeeze()["E"]
+        row["E'"] = row["E\""] + row["nu"]
+    else:
+        row["E\""] = -10000
+    return row
+
+transitions = transitions.parallel_apply(lambda x:computeUpperState(x, marvelEnergies), result_type="expand", axis=1)
+transitions = transitions[transitions["E\""] >= 0]
+print(transitions[["nu", "Tag'", "Tag\"", "Source", "E'", "E\""]].head(20).to_string(index=False))
