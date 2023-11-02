@@ -10,7 +10,7 @@ class mapSymmetry(dict):
              3: "E'",
              4: "A1\"",
              5: "A2\"",
-             6: "E'"
+             6: "E\""
         }[int(str(key)[0])]
         return symmetry
 

@@ -18,7 +18,7 @@ print(marvelEnergies.head(20).to_string(index=False))
 transitionsColumns = ["nu", "unc1", "unc2", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "inv'", "Gamma'", "Nb'",
                       "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "inv\"", "Gamma\"", "Nb\"", "Source"]
 
-transitions = pd.read_csv("../Marvel-14NH3-Main.txt", delim_whitespace=True, names=transitionsColumns)
+allTransitions = pd.read_csv("../Marvel-14NH3-2020.txt", delim_whitespace=True, names=transitionsColumns)
 
 transitionsFiles = [
     "../21CaCeBeCa/Assigned21CaCeBeCaMarvel.transitions",
@@ -31,9 +31,12 @@ transitionsFiles = [
 
 for transitionFile in transitionsFiles:
     transitionsToAdd = pd.read_csv(transitionFile, delim_whitespace=True, names=transitionsColumns)
-    transitions = pd.concat([transitions, transitionsToAdd])
+    allTransitions = pd.concat([allTransitions, transitionsToAdd])
 
-transitions = transitions[transitions["nu"] > 0]
+# Filtering
+Jupper = 0
+transitions = allTransitions[allTransitions["nu"] > 0]
+transitions = transitions[transitions["J'"] == Jupper]
 print(transitions.head(20).to_string(index=False))
 
 def assignStateTags(row):
@@ -55,4 +58,24 @@ def computeUpperState(row, marvelEnergies):
 
 transitions = transitions.parallel_apply(lambda x:computeUpperState(x, marvelEnergies), result_type="expand", axis=1)
 transitions = transitions[transitions["E\""] >= 0]
-print(transitions[["nu", "Tag'", "Tag\"", "Source", "E'", "E\""]].head(20).to_string(index=False))
+
+transitionsGroupedByUpperState = transitions.groupby(["Tag'"])
+def applyCombinationDifferences(transitionsToUpperState, threshold=0.1):
+    transitionsToUpperState["Average E'"] = transitionsToUpperState["E'"].mean()
+    transitionsToUpperState["Problem"] = abs(transitionsToUpperState["E'"] - transitionsToUpperState["Average E'"]) > threshold
+    # If a problematic transition exists we mark all transitions to this upper state as those we wish to return later
+    transitionsToUpperState["Return"] = False
+    transitionsToUpperState["Return"] = transitionsToUpperState["Problem"].any()
+    return transitionsToUpperState
+
+threshold = 0.1
+transitions = transitionsGroupedByUpperState.parallel_apply(lambda x:applyCombinationDifferences(x, threshold))
+transitions = transitions[transitions["Return"]]
+
+print(transitions[["nu", "unc1", "Tag'", "Tag\"", "Source", "Average E'", "E'", "E\"", "Problem"]].head(20).to_string(index=False))
+
+allTransitions = allTransitions.sort_values(by=["nu"])
+allTransitions = allTransitions.to_string(index=False, header=False)
+marvelFile = "../Marvel-14NH3-Main.txt"
+with open(marvelFile, "w+") as FileToWriteTo:
+    FileToWriteTo.write(allTransitions)
