@@ -105,7 +105,11 @@ transitionsToRemove = [
     "96BrMa.609",
     "14CeHoVeCa.239",
     "22HuSuTo.65",
-    
+    "96BrMa.639",
+    "96BrMa.640",
+    "14CeHoVeCa.195",
+    "96BrMa.645",
+    # The above transitions were removed in the first instance of combination difference tests
 ]
 
 transitionsToCorrect = {
@@ -115,9 +119,9 @@ transitionsToCorrect = {
 allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, transitionsToRemove, transitionsToCorrect), axis=1, result_type="expand")
 
 # Filtering
-Jupper = 11
+Jupper = 13
 transitions = allTransitions[allTransitions["nu"] > 0]
-transitions = transitions[transitions["J'"] == Jupper]
+# transitions = transitions[transitions["J'"] == Jupper]
 print(transitions.head(20).to_string(index=False))
 
 def assignStateTags(row):
