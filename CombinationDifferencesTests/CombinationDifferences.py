@@ -74,7 +74,38 @@ transitionsToRemove = [
     "23CaCeVo.44",
     "22HuSuTo.45",
     "22HuSuTo.46",
-    "22HuSuTo.47"
+    "22HuSuTo.47",
+    "22HuSuTo.379", #
+    "22HuSuTo.380", #
+    "22HuSuTo.381", #
+    "22HuSuTo.892", #
+    "22HuSuTo.893", #
+    "22HuSuTo.894", #
+    "13DoHiYuTe.10681",
+    "96BrMa.646",
+    "22HuSuTo.521", #
+    "22HuSuTo.522", #
+    "22HuSuTo.779", #
+    "22HuSuTo.780", #
+    "22HuSuTo.781", #
+    "22HuSuTo.782", #
+    "22HuSuTo.57",
+    "22HuSuTo.58",
+    "22HuSuTo.59",
+    "22HuSuTo.795", #
+    "22HuSuTo.796", #
+    "22CaCeVaCa.1187",
+    "22CaCeVaCa.4947",
+    "14CeHoVeCa.138",
+    "22CaCeVaCa.1182",
+    "22CaCeVaCa.1834",
+    "22CaCeVaCa.3206",
+    "22CaCeVaCa.4946",
+    "96BrMa.139",
+    "96BrMa.609",
+    "14CeHoVeCa.239",
+    "22HuSuTo.65",
+    
 ]
 
 transitionsToCorrect = {
@@ -84,7 +115,7 @@ transitionsToCorrect = {
 allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, transitionsToRemove, transitionsToCorrect), axis=1, result_type="expand")
 
 # Filtering
-Jupper = 7
+Jupper = 11
 transitions = allTransitions[allTransitions["nu"] > 0]
 transitions = transitions[transitions["J'"] == Jupper]
 print(transitions.head(20).to_string(index=False))
