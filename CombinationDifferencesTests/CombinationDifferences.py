@@ -40,6 +40,7 @@ def removeTransitions(row, transitionsToRemove, transitionsToCorrect):
         row["nu"] = transitionsToCorrect[row["Source"]]
     return row
 
+# List of transitions to be invalidated
 transitionsToRemove = [
     "22CaCeVaCa.4941",
     "96BrMa.642",
@@ -109,7 +110,11 @@ transitionsToRemove = [
     "96BrMa.640",
     "14CeHoVeCa.195",
     "96BrMa.645",
-    # The above transitions were removed in the first instance of combination difference tests
+    # The above transitions were removed in the first instance of combination difference tests with tolerance 0.1 cm-1
+    "22HuSuTo.345",
+    "22HuSuTo.347",
+    "22HuSuTo.348"
+    # A further check on whether symmetry selection rules are respected invalidated the above three lines
 ]
 
 transitionsToCorrect = {
@@ -153,19 +158,44 @@ def applyCombinationDifferences(transitionsToUpperState, threshold=0.1):
     transitionsToUpperState["Return"] = transitionsToUpperState["Problem"].any()
     return transitionsToUpperState
 
-threshold = 0.1
+# Tolerance for the combination difference test - adjust accordingly
+threshold = 0.1 # cm-1
 transitions = transitionsGroupedByUpperState.parallel_apply(lambda x:applyCombinationDifferences(x, threshold))
 returnedTransitions = transitions[transitions["Return"]]
 
-print("Returned combination differences:")
+print("\n Returned combination differences:")
 print(returnedTransitions[["nu", "unc1", "Tag'", "Tag\"", "Source", "Average E'", "E'", "E\"", "Problem"]].to_string(index=False))
 
 transitionsByUpperStateEnergy = transitions.sort_values(by=["E'"])
 targetUpperState = 7075.641107
 transitionsByUpperStateEnergy = transitionsByUpperStateEnergy[transitionsByUpperStateEnergy["E'"] > targetUpperState - 1]
 transitionsByUpperStateEnergy = transitionsByUpperStateEnergy[targetUpperState + 1 > transitionsByUpperStateEnergy["E'"]]
-print(f"Returned upper state energies centred on {targetUpperState}: ")
+print(f"\n Returned upper state energies centred on {targetUpperState}: ")
 print(transitionsByUpperStateEnergy[["nu", "unc1", "Tag'", "Tag\"", "Source", "Average E'", "E'", "E\"", "Problem"]].to_string(index=False))
+
+# For checking if transitions obey symmetry selection rules
+runSelectionRulesCheck = True
+if runSelectionRulesCheck:
+    selectionRules = {
+        "A1'": "A1\"", # Technically the nuclear spin statistical weights of the A1 states are zero
+        "A1\"": "A1'",
+        "A2'": "A2\"",
+        "A2\"": "A2'",
+        "E'": "E\"",
+        "E\"": "E'",
+    }
+
+    def selectionRulesCheck(row, selectionRules):
+        row["SR Broken"] = False 
+        if "MAGIC" not in row["Source"]:
+            if row["Gamma\""] != selectionRules[row["Gamma'"]]:
+                row["SR Broken"] = True
+        return row
+    
+    transitions = transitions.parallel_apply(lambda x:selectionRulesCheck(x, selectionRules), axis=1, result_type="expand")
+    transitionsThatBreakSelectionRules = transitions[transitions["SR Broken"]]
+    print("\n Printing transitions which violate selection rules: ")
+    print(transitionsThatBreakSelectionRules[["nu", "unc1", "Tag'", "Tag\"", "Source", "Average E'", "E'", "E\"", "Problem"]].to_string(index=False))
 
 # For when matching to states file is needed
 readFromStatesFile = False
