@@ -84,7 +84,15 @@ def findMatchingStates(row, states):
     if row["E'(UCL)"] > 0:
         matchingUpperStates["Obs-Calc"] = abs(matchingUpperStates["E"] - row["E'(UCL)"])
     else:
+        # matchingUpperStates = matchingUpperStates[matchingUpperStates["n1"] == row["v1'"]]
+        # matchingUpperStates = matchingUpperStates[matchingUpperStates["n2"] == row["v2'"]]
+        # matchingUpperStates = matchingUpperStates[matchingUpperStates["n3"] == row["v3'"]]
+        # matchingUpperStates = matchingUpperStates[matchingUpperStates["n4"] == row["v4'"]]
         matchingUpperStates["Obs-Calc"] = abs(matchingUpperStates["E"] - row["E'(JA)"])
+    # matchingLowerStates = matchingLowerStates[matchingLowerStates["n1"] == row["v1'"]]
+    # matchingLowerStates = matchingLowerStates[matchingLowerStates["n2"] == row["v2'"]]
+    # matchingLowerStates = matchingLowerStates[matchingLowerStates["n3"] == row["v3'"]]
+    # matchingLowerStates = matchingLowerStates[matchingLowerStates["n4"] == row["v4'"]]    
     matchingLowerStates["Obs-Calc"] = abs(matchingLowerStates["E"] - row["E\""])
     matchingUpperStates = matchingUpperStates.sort_values(by="Obs-Calc")
     matchingLowerStates = matchingLowerStates.sort_values(by="Obs-Calc")
@@ -98,12 +106,14 @@ def findMatchingStates(row, states):
     row["L4\""] = matchingLowerState["l4"]
     row["Gamma\""] = matchingLowerState["Gamma"]
     row["Nb\""] = matchingLowerState["Nb"]
+    row["i'"] = matchingUpperState["i"]
+    row["i\""] = matchingLowerState["i"]
     return row
         
 df = df.parallel_apply(lambda x:findMatchingStates(x, states), axis=1, result_type="expand")
 marvelColumns = ["Wavenumber", "Uncertainty", "Uncertainty2"] + [f"v{i}'" for i in range(1,5)] + ["L3'"] + ["L4'"]
 marvelColumns += ["J'", "K'", "inv'", "Gamma'", "Nb'"] + [f"v{i}\"" for i in range(1,5)] + ["L3\""] + ["L4\""]
-marvelColumns += ["J\"", "K\"", "inv\"", "Gamma\"", "Nb\""]
+marvelColumns += ["J\"", "K\"", "inv\"", "Gamma\"", "Nb\"", "i'", "i\""]
 df = df[marvelColumns]
 
 df["Gamma'"] = df["Gamma'"].map(symmetryMapping)

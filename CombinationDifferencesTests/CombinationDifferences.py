@@ -33,8 +33,40 @@ for transitionFile in transitionsFiles:
     transitionsToAdd = pd.read_csv(transitionFile, delim_whitespace=True, names=transitionsColumns)
     allTransitions = pd.concat([allTransitions, transitionsToAdd])
 
+def removeTransitions(row, transitionsToRemove, transitionsToCorrect):
+    if row["Source"] in transitionsToRemove:
+        row["nu"] = -row["nu"]
+    if row["Source"] in transitionsToCorrect.keys():
+        row["nu"] = transitionsToCorrect[row["Source"]]
+    return row
+
+transitionsToRemove = [
+    "22CaCeVaCa.4941",
+    "96BrMa.642",
+    "21CaCeBeCa.1674",
+    "96BrMa.643",
+    "22HuSuTo.1233",
+    "93LuHeNi.240",
+    "93LuHeNi.348",
+    "21CeCaCo.204",
+    "22HuSuTo.342", # Transitions marked with a hash
+    "22HuSuTo.343", # appear to have been assigned in a way
+    "22HuSuTo.344", # that breaks selection rules
+    "95KlTaBr.417",
+    "22HuSuTo.747", #
+    "22HuSuTo.748", #
+    "22HuSuTo.749", #
+    "22HuSuTo.750", #
+]
+
+transitionsToCorrect = {
+    "14CeHoVeCa.240": 4275.8599
+}
+
+allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, transitionsToRemove, transitionsToCorrect), axis=1, result_type="expand")
+
 # Filtering
-Jupper = 0
+Jupper = 7
 transitions = allTransitions[allTransitions["nu"] > 0]
 transitions = transitions[transitions["J'"] == Jupper]
 print(transitions.head(20).to_string(index=False))
@@ -70,9 +102,46 @@ def applyCombinationDifferences(transitionsToUpperState, threshold=0.1):
 
 threshold = 0.1
 transitions = transitionsGroupedByUpperState.parallel_apply(lambda x:applyCombinationDifferences(x, threshold))
-transitions = transitions[transitions["Return"]]
+returnedTransitions = transitions[transitions["Return"]]
 
-print(transitions[["nu", "unc1", "Tag'", "Tag\"", "Source", "Average E'", "E'", "E\"", "Problem"]].head(20).to_string(index=False))
+print("Returned combination differences:")
+print(returnedTransitions[["nu", "unc1", "Tag'", "Tag\"", "Source", "Average E'", "E'", "E\"", "Problem"]].to_string(index=False))
+
+transitionsByUpperStateEnergy = transitions.sort_values(by=["E'"])
+targetUpperState = 7075.641107
+transitionsByUpperStateEnergy = transitionsByUpperStateEnergy[transitionsByUpperStateEnergy["E'"] > targetUpperState - 1]
+transitionsByUpperStateEnergy = transitionsByUpperStateEnergy[targetUpperState + 1 > transitionsByUpperStateEnergy["E'"]]
+print(f"Returned upper state energies centred on {targetUpperState}: ")
+print(transitionsByUpperStateEnergy[["nu", "unc1", "Tag'", "Tag\"", "Source", "Average E'", "E'", "E\"", "Problem"]].to_string(index=False))
+
+# For when matching to states file is needed
+readFromStatesFile = False
+if readFromStatesFile:
+    statesFileColumns = ["i", "E", "g", "J", "weight", "p", "Gamma", "Nb", "n1", "n2", "n3", "n4", "l3", "l4", "inversion", "J'", "K'", "pRot", "v1", "v2", "v3", "v4", "v5", "v6", "GammaVib", "Calc"]
+    states = pd.read_csv("../14N-1H3__CoYuTe.states", delim_whitespace=True, names=statesFileColumns)
+    states = states[states["E"] < 7000]
+    states = states[states["g"] > 0]
+    states = states[states["J"] == Jupper]
+    states = states[states["E"] > 6500]
+    print(states.to_string(index=False))
+
+    statesList = [
+        "21CaCeBeCa.1673",
+        "21CaCeBeCa.1674"
+    ]
+
+    def findMatchingStates(row, states):
+        matchingStates = states[states["J"] == row["J'"]]
+        matchingStates = matchingStates[matchingStates["Gamma"] == row["Gamma'"]]
+        matchingStates = matchingStates[matchingStates["Nb"] == row["Nb'"]]
+        row["CoYuTe E'"] = matchingStates.squeeze()["E"]
+        return row
+    
+    transitions = transitions.parallel_apply(lambda x:findMatchingStates(x, states), axis=1, result_type="expand")
+    statesFromList = transitions[transitions["Source"].isin(statesList)]
+    print("Selected states with CoYuTe upper state energy:")
+    print(statesFromList[["nu", "unc1", "Tag'", "Tag\"", "Source", "Average E'", "E'", "CoYuTe E'", "E\"", "Problem"]].to_string(index=False))
+
 
 allTransitions = allTransitions.sort_values(by=["nu"])
 allTransitions = allTransitions.to_string(index=False, header=False)
