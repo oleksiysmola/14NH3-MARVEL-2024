@@ -49,14 +49,32 @@ transitionsToRemove = [
     "93LuHeNi.240",
     "93LuHeNi.348",
     "21CeCaCo.204",
-    "22HuSuTo.342", # Transitions marked with a hash
-    "22HuSuTo.343", # appear to have been assigned in a way
-    "22HuSuTo.344", # that breaks selection rules
+    "22HuSuTo.342", ## Transitions marked with a hash
+    "22HuSuTo.343", ## appear to have been assigned in a way
+    "22HuSuTo.344", ## that breaks selection rules
     "95KlTaBr.417",
-    "22HuSuTo.747", #
-    "22HuSuTo.748", #
-    "22HuSuTo.749", #
-    "22HuSuTo.750", #
+    "22HuSuTo.747", ## Two hashes means they've also been checked by eye
+    "22HuSuTo.748", ## to see if their lower state energies have been matched
+    "22HuSuTo.749", ## to the states file correctly
+    "22HuSuTo.750", ##
+    "22HuSuTo.359", #
+    "22HuSuTo.360", #
+    "22HuSuTo.361", #
+    "89UrTuRaGu.894",
+    "22HuSuTo.623", #
+    "22HuSuTo.624", #
+    "22HuSuTo.625", #
+    "22HuSuTo.626", #
+    "14CeHoVeCa.236",
+    "22CaCeVaCa.2052",
+    "22HuSuTo.764", #
+    "22HuSuTo.765", #
+    "22HuSuTo.766", #
+    "22HuSuTo.767", #
+    "23CaCeVo.44",
+    "22HuSuTo.45",
+    "22HuSuTo.46",
+    "22HuSuTo.47"
 ]
 
 transitionsToCorrect = {
