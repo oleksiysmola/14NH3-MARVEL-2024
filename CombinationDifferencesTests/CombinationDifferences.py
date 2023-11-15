@@ -33,11 +33,25 @@ for transitionFile in transitionsFiles:
     transitionsToAdd = pd.read_csv(transitionFile, delim_whitespace=True, names=transitionsColumns)
     allTransitions = pd.concat([allTransitions, transitionsToAdd])
 
-def removeTransitions(row, transitionsToRemove, transitionsToCorrect):
+def removeTransitions(row, transitionsToRemove, transitionsToCorrect, transitionsToReassign):
     if row["Source"] in transitionsToRemove:
         row["nu"] = -row["nu"]
     if row["Source"] in transitionsToCorrect.keys():
         row["nu"] = transitionsToCorrect[row["Source"]]
+    if row["Source"] in transitionsToReassign.keys():
+        numberOfQuantumNumbers = int((len(row) - 4)/2)
+        reassignment = transitionsToReassign[row["Source"]]
+        upperStateReassignment = reassignment[0]
+        lowerStateReassignment = reassignment[1]
+        columnLabels = row.index.tolist()
+        if upperStateReassignment != None:
+            newUpperStateLabels = upperStateReassignment.split("-")
+            for i in range(3, 3 + numberOfQuantumNumbers):
+                row[columnLabels[i]] = newUpperStateLabels[i - 3]
+        if lowerStateReassignment != None:
+            newLowerStateLabels = lowerStateReassignment.split("-")
+            for i in range(3 + numberOfQuantumNumbers, 3 + 2*numberOfQuantumNumbers):
+                row[columnLabels[i]] = newLowerStateLabels[i - 3]
     return row
 
 # List of transitions to be invalidated
@@ -111,22 +125,71 @@ transitionsToRemove = [
     "14CeHoVeCa.195",
     "96BrMa.645",
     # The above transitions were removed in the first instance of combination difference tests with tolerance 0.1 cm-1
-    "22HuSuTo.345",
-    "22HuSuTo.347",
-    "22HuSuTo.348"
+    "22HuSuTo.345", #
+    "22HuSuTo.347", #
+    "22HuSuTo.348", # 
     # A further check on whether symmetry selection rules are respected invalidated the above three lines
+    "21CaCeBeCa.961",
+    "22HuSuTo.798",
+    "23CaCeVo.1010",
+    "23CaCeVo.1070",
+    "23CaCeVo.1262",
+    "23CaCeVo.1383",
+    "23CaCeVo.1457",
+    "23CaCeVo.1704",
+    "23CaCeVo.1011",
+    "23CaCeVo.1071",
+    "23CaCeVo.1385",
+    "23CaCeVo.1459",
+    "23CaCeVo.1705",
+    "23CaCeVo.3176",
+    "14CeHoVeCa.111",
+    "21CaCeBeCa.1589",
+    "23CaCeVo.2361",
+    "23CaCeVo.2516",
+    "22CaCeVaCa.270",
+    "22CaCeVaCa.1416",
+    # The above set of transitions were invalidated at a CD threshold of 0.05
+    # "22CaCeVaCaa.2139",	
+    # "22CaCeVaCaa.3153",	
+    # "22CaCeVaCaa.3915",	
+    # "22CaCeVaCaa.3150",	
+    # "22CaCeVaCaa.2137",	
+    # "23CaCeVo.1704",	
+    # "23CaCeVo.1383",	
+    # "23CaCeVo.1010",	
+    # "23CaCeVo.1070",	
+    # "23CaCeVo.1457",	
+    # "23CaCeVo.1262",	
+    # "22CaCeVaCaa.4322",	
+    # "22CaCeVaCaa.2036",	
+    # "89UrTuRaGu.476",		
+    # "22HuSuTo.74",		
+    # "22HuSuTo.75",		
+    # "21CeCaCo.189",		
+    # "89UrTuRaGu.564",
+    # After the aforementioned validations here we remove the first set of very bad lines highlighted in MARVEL	
 ]
 
 transitionsToCorrect = {
-    "14CeHoVeCa.240": 4275.8599
+    "14CeHoVeCa.240": 4275.8599 # For some reason there was a typo copying from 14CeHoVeCa in the MARVEL 2020 paper
 }
 
-allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, transitionsToRemove, transitionsToCorrect), axis=1, result_type="expand")
+transitionsToReassign = {
+    "21CaCeBeCa.480": ["0-6-0-0-0-0-8-4-s-E'-308", None],
+    "21CaCeBeCa.1119": ["0-6-0-0-0-0-8-4-s-E'-308", None],
+    "22CaCeVaCa.5190": ["0-6-0-0-0-0-8-4-s-E'-308", None],
+    "22CaCeVaCaa.2036": ["0-6-0-0-0-0-8-4-s-E'-308", None],
+    "22CaCeVaCaa.4322": ["0-6-0-0-0-0-8-4-s-E'-308", None],
+    "21CaCeBeCa.479": ["0-6-0-0-0-0-8-4-s-E'-307", None],
+}
+
+allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, transitionsToRemove, transitionsToCorrect, transitionsToReassign), axis=1, result_type="expand")
 
 # Filtering
-Jupper = 13
+Jupper = 8
 transitions = allTransitions[allTransitions["nu"] > 0]
-# transitions = transitions[transitions["J'"] == Jupper]
+transitions = transitions[transitions["J'"] == Jupper]
 print(transitions.head(20).to_string(index=False))
 
 def assignStateTags(row):
@@ -159,7 +222,7 @@ def applyCombinationDifferences(transitionsToUpperState, threshold=0.1):
     return transitionsToUpperState
 
 # Tolerance for the combination difference test - adjust accordingly
-threshold = 0.1 # cm-1
+threshold = 0.05 # cm-1
 transitions = transitionsGroupedByUpperState.parallel_apply(lambda x:applyCombinationDifferences(x, threshold))
 returnedTransitions = transitions[transitions["Return"]]
 
@@ -174,7 +237,7 @@ print(f"\n Returned upper state energies centred on {targetUpperState}: ")
 print(transitionsByUpperStateEnergy[["nu", "unc1", "Tag'", "Tag\"", "Source", "Average E'", "E'", "E\"", "Problem"]].to_string(index=False))
 
 # For checking if transitions obey symmetry selection rules
-runSelectionRulesCheck = True
+runSelectionRulesCheck = False
 if runSelectionRulesCheck:
     selectionRules = {
         "A1'": "A1\"", # Technically the nuclear spin statistical weights of the A1 states are zero
