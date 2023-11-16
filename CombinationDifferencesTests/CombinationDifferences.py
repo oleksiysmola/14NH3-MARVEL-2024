@@ -33,7 +33,7 @@ for transitionFile in transitionsFiles:
     transitionsToAdd = pd.read_csv(transitionFile, delim_whitespace=True, names=transitionsColumns)
     allTransitions = pd.concat([allTransitions, transitionsToAdd])
 
-def removeTransitions(row, transitionsToRemove, transitionsToCorrect, transitionsToReassign, badLines, uncertaintyScaleFactor=10, repeatTolerance=3):
+def removeTransitions(row, transitionsToRemove, transitionsToCorrect, transitionsToReassign, badLines, uncertaintyScaleFactor=2, repeatTolerance=3, maximumUncertainty=0.1):
     if row["Source"] in transitionsToRemove:
         row["nu"] = -row["nu"]
     if row["Source"] in transitionsToCorrect.keys():
@@ -65,6 +65,9 @@ def removeTransitions(row, transitionsToRemove, transitionsToCorrect, transition
             else:
                 row["unc1"] = uncertaintyScaleFactor*badLine["Uncertainty"]
                 row["unc2"] = uncertaintyScaleFactor*badLine["Uncertainty"]
+    if row["unc1"] >= maximumUncertainty:
+        if row["nu"] > 0:
+            row["nu"] = -row["nu"]
     return row
 
 # List of transitions to be invalidated
@@ -197,7 +200,7 @@ badLines = pd.read_csv("BadLines.txt", delim_whitespace=True)
 allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, transitionsToRemove, transitionsToCorrect, transitionsToReassign, badLines), axis=1, result_type="expand")
 
 # Filtering
-Jupper = 20
+Jupper = 0
 transitions = allTransitions[allTransitions["nu"] > 0]
 transitions = transitions[transitions["J'"] == Jupper]
 print(transitions.head(20).to_string(index=False))
