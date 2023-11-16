@@ -149,25 +149,19 @@ transitionsToRemove = [
     "23CaCeVo.2516",
     "22CaCeVaCa.270",
     "22CaCeVaCa.1416",
+    "22HuSuTo.1034",
+    "23CaCeVo.2124",
+    "14CeHoVeCa.44",
+    "15BaYuTeCl.173",
+    "22CaCeVaCa.1058",
+    "13DoHiYuTe.880",
+    "13DoHiYuTe.2250",
+    "16PeYuPi_S3.888",
+    "15BaYuTeCl.1249",
     # The above set of transitions were invalidated at a CD threshold of 0.05
-    # "22CaCeVaCaa.2139",	
-    # "22CaCeVaCaa.3153",	
-    # "22CaCeVaCaa.3915",	
-    # "22CaCeVaCaa.3150",	
-    # "22CaCeVaCaa.2137",	
-    # "23CaCeVo.1704",	
-    # "23CaCeVo.1383",	
-    # "23CaCeVo.1010",	
-    # "23CaCeVo.1070",	
-    # "23CaCeVo.1457",	
-    # "23CaCeVo.1262",	
-    # "22CaCeVaCaa.4322",	
-    # "22CaCeVaCaa.2036",	
-    # "89UrTuRaGu.476",		
-    # "22HuSuTo.74",		
-    # "22HuSuTo.75",		
-    # "21CeCaCo.189",		
-    # "89UrTuRaGu.564",
+    "89UrTuRaGu.476",
+    "21CeCaCo.189",
+    "89UrTuRaGu.564",
     # After the aforementioned validations here we remove the first set of very bad lines highlighted in MARVEL	
 ]
 
@@ -187,7 +181,7 @@ transitionsToReassign = {
 allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, transitionsToRemove, transitionsToCorrect, transitionsToReassign), axis=1, result_type="expand")
 
 # Filtering
-Jupper = 8
+Jupper = 20
 transitions = allTransitions[allTransitions["nu"] > 0]
 transitions = transitions[transitions["J'"] == Jupper]
 print(transitions.head(20).to_string(index=False))
