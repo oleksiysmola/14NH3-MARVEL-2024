@@ -1,7 +1,10 @@
 # MARVEL NH3
-The purpose of this repository is to track changes throughout the application of the MARVEL procedure (Measured Active Ro-Vibrational Energy Levels) (Furtenbacher et al. 2007) to transitions of the main ammonia isotopologue. The present work is intended to be an update of the previous MARVEL energy levels obtained by (Furtenbacher et al. 2020). The work may end up forming the basis of an ORBYTS outreach project. 
+The purpose of this repository is to track changes throughout the application of the MARVEL procedure (Measured Active Ro-Vibrational Energy Levels) (Furtenbacher et al. 2007) to transitions of the main ammonia isotopologue. The present work is intended to be an update of the previous MARVEL energy levels obtained by (Furtenbacher et al. 2020). 
 
-Link to the latest version (4.1) of MARVEL: https://respecth.elte.hu/MARVEL4/index.html
+Terminal command to run the MARVEL 4.1 executable:
+./MARVEL4.1.x -s segments.txt -t Marvel-14NH3-Main.txt
+
+Alternatively, the latest online version (4.1) of MARVEL is available at: https://respecth.elte.hu/MARVEL4/index.html
 
 ## References
  Furtenbacher, T; Csaszar, AG; Tennyson, J; (2007) MARVEL: measured active rotational-vibrational energy levels. J MOL SPECTROSC , 245 (2) 115 - 125  https://doi.org/10.1016/j.jms.2007.07.005

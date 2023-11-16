@@ -33,7 +33,7 @@ for transitionFile in transitionsFiles:
     transitionsToAdd = pd.read_csv(transitionFile, delim_whitespace=True, names=transitionsColumns)
     allTransitions = pd.concat([allTransitions, transitionsToAdd])
 
-def removeTransitions(row, transitionsToRemove, transitionsToCorrect, transitionsToReassign):
+def removeTransitions(row, transitionsToRemove, transitionsToCorrect, transitionsToReassign, badLines, uncertaintyScaleFactor=10, repeatTolerance=3):
     if row["Source"] in transitionsToRemove:
         row["nu"] = -row["nu"]
     if row["Source"] in transitionsToCorrect.keys():
@@ -52,6 +52,19 @@ def removeTransitions(row, transitionsToRemove, transitionsToCorrect, transition
             newLowerStateLabels = lowerStateReassignment.split("-")
             for i in range(3 + numberOfQuantumNumbers, 3 + 2*numberOfQuantumNumbers):
                 row[columnLabels[i]] = newLowerStateLabels[i - 3]
+    if row["Source"] in badLines["Line"].tolist():
+        matchingBadLines = badLines[badLines["Line"] == row["Source"]]
+        badLine = matchingBadLines.tail(1).squeeze()
+        if len(matchingBadLines) < repeatTolerance:
+            row["unc1"] = badLine["Uncertainty'"]
+            row["unc2"] = badLine["Uncertainty'"]
+        else:
+            if badLine["Ratio"] > uncertaintyScaleFactor:
+                row["unc1"] = badLine["Uncertainty'"]
+                row["unc2"] = badLine["Uncertainty'"]
+            else:
+                row["unc1"] = uncertaintyScaleFactor*badLine["Uncertainty"]
+                row["unc2"] = uncertaintyScaleFactor*badLine["Uncertainty"]
     return row
 
 # List of transitions to be invalidated
@@ -169,6 +182,7 @@ transitionsToCorrect = {
     "14CeHoVeCa.240": 4275.8599 # For some reason there was a typo copying from 14CeHoVeCa in the MARVEL 2020 paper
 }
 
+# Transitions to reassign in format (Source Tag: [New Upper State Tag, New Lower State Tag])
 transitionsToReassign = {
     "21CaCeBeCa.480": ["0-6-0-0-0-0-8-4-s-E'-308", None],
     "21CaCeBeCa.1119": ["0-6-0-0-0-0-8-4-s-E'-308", None],
@@ -178,7 +192,9 @@ transitionsToReassign = {
     "21CaCeBeCa.479": ["0-6-0-0-0-0-8-4-s-E'-307", None],
 }
 
-allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, transitionsToRemove, transitionsToCorrect, transitionsToReassign), axis=1, result_type="expand")
+badLines = pd.read_csv("BadLines.txt", delim_whitespace=True)
+
+allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, transitionsToRemove, transitionsToCorrect, transitionsToReassign, badLines), axis=1, result_type="expand")
 
 # Filtering
 Jupper = 20
