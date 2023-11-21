@@ -1,5 +1,5 @@
 # MARVEL NH3
-The purpose of this repository is to track changes throughout the application of the MARVEL procedure (Measured Active Ro-Vibrational Energy Levels) (Furtenbacher et al. 2007) to transitions of the main ammonia isotopologue. The present work is intended to be an update of the previous MARVEL energy levels obtained by (Furtenbacher et al. 2020). 
+The purpose of this repository is to track changes throughout the application of the MARVEL procedure (Measured Active Ro-Vibrational Energy Levels) (Furtenbacher et al. 2007) to transitions of the main ammonia isotopologue. The present work is intended to be an update of the previous MARVEL energy levels obtained by (Furtenbacher et al. 2020). Note that the states file is too large to be included in this repository so one may download it from the ExoMol website: https://exomol.com/data/molecules/NH3/14N-1H3/CoYuTe/.
 
 Terminal command to run the MARVEL 4.1 executable:
 ./MARVEL4.1.x -s segments.txt -t Marvel-14NH3-Main.txt
