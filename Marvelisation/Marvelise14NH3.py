@@ -34,7 +34,6 @@ for column in columnsToConvertToInteger:
     states[column] = states[column].astype(int)
 
 states = pd.merge(states, marvelEnergies[["Tag", "Em", "Uncertainty"]], on="Tag", how="left")
-# print(states[states["Tag"] == ""].head(20).to_string(index=False))
 
 columnsToConvertToFloat = ["Em", "E", "Calc", "weight", "Uncertainty"]
 for column in columnsToConvertToFloat:
@@ -69,21 +68,55 @@ print("Marvelisation complete!")
 statesFileColumns = ["i", "E", "g", "J", "weight", "p", "Gamma", "Nb", "n1", "n2", "n3", "n4", "l3", "l4", "inversion", "J'", "K'", "pRot", "v1", "v2", "v3", "v4", "v5", "v6", "GammaVib", "Marvel", "Calc"]
 states = states[statesFileColumns]
 
+def formatColumns(value, columnWidth):
+    return f'{value: >columnWidth}'
+    
+def reformatColumns(dataFrame, columnReformattingOptions):
+    collectedReformattedColumns = []
+    for key in columnReformattingOptions.keys():
+        dataFrameToReformat = dataFrame[columnReformattingOptions[key]]
+        collectedReformattedColumns += [dataFrameToReformat.applymap(formatColumns(columnWidth = key))]
+    dataFrame = pd.concat(collectedReformattedColumns, axis=1, join="inner")
+    return dataFrame
 
-def formatCell(value):
-    return f'{value: >12}'
+columnReformattingOptions = {
+    12: ['i', 'E', 'weight', 'Calc'],
+    6: ["g", "n1", "l3", "J'", "v1"],
+    2: ["Gamma", "pRot"],
+    8: ["Nb"],
+    3: ["n2", "n3", "n4", "l4", "K'", "v2", "v3", "v4", "v5", "v6", "Marvel"],
+    5: ["J", "inversion", "GammaVib"],
+    1: ["p"]
+}
+print("\n")
+print("Reformatting columns...")
+states = reformatColumns(states, columnReformattingOptions)
+# def formatEnergy(value):
+#     return f'{value: >12}'
 
-columnsToFormat = ['i', 'E', 'Calc', 'weight']
-statesColumnsToFormat = states[columnsToFormat]
-states = states.drop(columnsToFormat, axis=1)
-statesColumnsToFormat = statesColumnsToFormat.applymap(formatCell)
-states = pd.concat([states, statesColumnsToFormat], axis=1, join="inner")
-states = states[statesFileColumns]
+# columnsToFormat = ['i', 'E', 'weight', 'Calc']
+# statesColumnsToFormat = states[columnsToFormat]
+# statesColumnsToFormat = statesColumnsToFormat.applymap(formatEnergy)
+# listOfFormattedColumns = [statesColumnsToFormat]
+
+    
+print("\n")
+print("Reformatting complete! Concatonating columns...")
+# unformattedColumns = []
+# for column in statesFileColumns:
+#     if column not in columnsToFormat:
+#         unformattedColumns += [column]
+# states = states[unformattedColumns]
+    
 
 pd.set_option('display.float_format', '{:.6f}'.format)
 
+states = pd.concat([states] + listOfFormattedColumns, axis=1, join="inner")
+states = states[statesFileColumns]
+print("\n")
+print("Concationation complete!")
 print(states.head(20).to_string(index=False))
-
+print("\n")
 print("Printing states file...")
 states = states.to_string(index=False, header=False)
 statesFile = "14N-1H3__CoYuTe-Marvelised-2024.states"
