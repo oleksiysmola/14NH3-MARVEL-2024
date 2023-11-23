@@ -68,24 +68,29 @@ print("Marvelisation complete!")
 statesFileColumns = ["i", "E", "g", "J", "weight", "p", "Gamma", "Nb", "n1", "n2", "n3", "n4", "l3", "l4", "inversion", "J'", "K'", "pRot", "v1", "v2", "v3", "v4", "v5", "v6", "GammaVib", "Marvel", "Calc"]
 states = states[statesFileColumns]
 
-def formatColumns(value, columnWidth):
-    return f'{value: >columnWidth}'
+columnWidth = 1
+def formatColumns(value):
+    global columnWidth
+    return f'{value: >{columnWidth}}'
     
 def reformatColumns(dataFrame, columnReformattingOptions):
+    global columnWidth 
     collectedReformattedColumns = []
     for key in columnReformattingOptions.keys():
+        columnWidth = key
         dataFrameToReformat = dataFrame[columnReformattingOptions[key]]
-        collectedReformattedColumns += [dataFrameToReformat.applymap(formatColumns(columnWidth = key))]
+        collectedReformattedColumns += [dataFrameToReformat.applymap(formatColumns)]
     dataFrame = pd.concat(collectedReformattedColumns, axis=1, join="inner")
     return dataFrame
 
 columnReformattingOptions = {
     12: ['i', 'E', 'weight', 'Calc'],
-    6: ["g", "n1", "l3", "J'", "v1"],
+    6: ["g", "n1", "J'", "v1"],
     2: ["Gamma", "pRot"],
-    8: ["Nb"],
+    10: ["Nb"],
     3: ["n2", "n3", "n4", "l4", "K'", "v2", "v3", "v4", "v5", "v6", "Marvel"],
-    5: ["J", "inversion", "GammaVib"],
+    7: ["J", "l3"],
+    5: ["inversion", "GammaVib"],
     1: ["p"]
 }
 print("\n")
@@ -101,7 +106,7 @@ states = reformatColumns(states, columnReformattingOptions)
 
     
 print("\n")
-print("Reformatting complete! Concatonating columns...")
+print("Reformatting complete!")
 # unformattedColumns = []
 # for column in statesFileColumns:
 #     if column not in columnsToFormat:
@@ -111,7 +116,7 @@ print("Reformatting complete! Concatonating columns...")
 
 pd.set_option('display.float_format', '{:.6f}'.format)
 
-states = pd.concat([states] + listOfFormattedColumns, axis=1, join="inner")
+# states = pd.concat([states] + listOfFormattedColumns, axis=1, join="inner")
 states = states[statesFileColumns]
 print("\n")
 print("Concationation complete!")
