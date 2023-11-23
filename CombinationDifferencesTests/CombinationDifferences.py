@@ -26,7 +26,7 @@ transitionsFiles = [
     "../22CaCeVaCa/AssignedRecommended22CaCeVaCaMarvel.transitions",
     "../22CaCeVaCaa/AssignedRecommended22CaCeVaCaaMarvel.transitions",
     "../22HuSuTo/22HuSuToMarvel.transitions",
-    "../23CaCeVo/Assigned23CaCeVoMarvel.transitions"
+    "../23CaCeVo/Assigned23CaCeVoMarvel.transitions",
     "../23YaDeLa/23YaDeLa.txt"
 ]
 
