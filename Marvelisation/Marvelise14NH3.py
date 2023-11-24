@@ -85,38 +85,22 @@ def reformatColumns(dataFrame, columnReformattingOptions):
 
 columnReformattingOptions = {
     12: ['i', 'E', 'weight', 'Calc'],
-    6: ["g", "n1", "J'", "v1"],
+    6: ["g", "n1", "J'", "l3","v1"],
     2: ["Gamma", "pRot"],
     10: ["Nb"],
     3: ["n2", "n3", "n4", "l4", "K'", "v2", "v3", "v4", "v5", "v6", "Marvel"],
-    7: ["J", "l3"],
+    7: ["J"],
     5: ["inversion", "GammaVib"],
     1: ["p"]
 }
 print("\n")
 print("Reformatting columns...")
 states = reformatColumns(states, columnReformattingOptions)
-# def formatEnergy(value):
-#     return f'{value: >12}'
-
-# columnsToFormat = ['i', 'E', 'weight', 'Calc']
-# statesColumnsToFormat = states[columnsToFormat]
-# statesColumnsToFormat = statesColumnsToFormat.applymap(formatEnergy)
-# listOfFormattedColumns = [statesColumnsToFormat]
-
-    
 print("\n")
 print("Reformatting complete!")
-# unformattedColumns = []
-# for column in statesFileColumns:
-#     if column not in columnsToFormat:
-#         unformattedColumns += [column]
-# states = states[unformattedColumns]
-    
 
 pd.set_option('display.float_format', '{:.6f}'.format)
 
-# states = pd.concat([states] + listOfFormattedColumns, axis=1, join="inner")
 states = states[statesFileColumns]
 print("\n")
 print("Concationation complete!")
