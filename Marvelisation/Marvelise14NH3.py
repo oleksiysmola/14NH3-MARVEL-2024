@@ -85,12 +85,13 @@ def reformatColumns(dataFrame, columnReformattingOptions):
 
 columnReformattingOptions = {
     12: ['i', 'E', 'weight', 'Calc'],
-    6: ["g", "n1", "J'","v1"],
+    6: ["g", "n1", "J'"],
     2: ["Gamma", "pRot"],
     10: ["Nb"],
     3: ["n2", "n3", "n4", "l4", "K'", "v2", "v3", "v4", "v5", "v6", "Marvel"],
-    7: ["J"],
-    5: ["l3", "inversion", "GammaVib"],
+    7: ["J", "v1"],
+    4: ["inversion"],
+    5: ["l3", "GammaVib"],
     1: ["p"]
 }
 print("\n")
