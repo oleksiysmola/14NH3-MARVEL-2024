@@ -27,7 +27,8 @@ transitionsFiles = [
     "../22CaCeVaCaa/AssignedRecommended22CaCeVaCaaMarvel.transitions",
     "../22HuSuTo/22HuSuToMarvel.transitions",
     "../23CaCeVo/Assigned23CaCeVoMarvel.transitions",
-    "../23YaDeLa/23YaDeLa.txt"
+    "../23YaDeLa/23YaDeLa.txt",
+    "../19SvRaVo/19SvRaVoMarvel.txt",
 ]
 
 for transitionFile in transitionsFiles:
@@ -175,6 +176,22 @@ transitionsToRemove = [
     "13DoHiYuTe.2250",
     "16PeYuPi_S3.888",
     "15BaYuTeCl.1249",
+    "19SvRaVo.28",
+    "19SvRaVo.13",
+    "19SvRaVo.31",
+    "19SvRaVo.12",
+    "19SvRaVo.10",
+    "19SvRaVo.39",
+    "19SvRaVo.17",
+    "19SvRaVo.19",
+    "19SvRaVo.30",
+    "19SvRaVo.36",
+    "19SvRaVo.46",
+    "19SvRaVo.33",
+    "19SvRaVo.34",
+    "19SvRaVo.35",
+    "19SvRaVo.24",
+    "19SvRaVo.11",
     # The above set of transitions were invalidated at a CD threshold of 0.05
     "89UrTuRaGu.476",
     "21CeCaCo.189",
@@ -201,7 +218,7 @@ badLines = pd.read_csv("BadLines.txt", delim_whitespace=True)
 allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, transitionsToRemove, transitionsToCorrect, transitionsToReassign, badLines), axis=1, result_type="expand")
 
 # Filtering
-Jupper = 0
+Jupper = 3
 transitions = allTransitions[allTransitions["nu"] > 0]
 transitions = transitions[transitions["J'"] == Jupper]
 print(transitions.head(20).to_string(index=False))
