@@ -45,26 +45,30 @@ def findBlockNumber(row, states):
     matchingLowerStates = matchingLowerStates[matchingLowerStates["nu4"] == 0]
     matchingLowerStates = matchingLowerStates[matchingLowerStates["L3"] == 0]
     matchingLowerStates = matchingLowerStates[matchingLowerStates["L4"] == 0]
-    matchingLowerStates["Tag"] = matchingLowerStates["J"].astype(str) + "-" + matchingLowerStates["K'"].astype(str) + "-" + matchingLowerStates["inv"].astype(str) + "-" + matchingLowerStates["GammaVib"].astype(str) + "-" + matchingLowerStates["pRot"].astype(str) + "-" + matchingLowerStates["Gamma"].astype(str)
-    matchingLowerStates = matchingLowerStates[matchingLowerStates["Tag"] == row["Tag\""]]
-    matchingLowerState = matchingLowerStates[matchingLowerStates["Tag"] == row["Tag\""]].head(1).squeeze()
-    if len(matchingLowerStates) == 1:
-        row["E\""] = matchingLowerState["E"]
-        row["Nb\""] = matchingLowerState["Nb"]
-        row["E'"] = row["E\""] + row["nu"]
-        matchingUpperStates = states[states["J"] == row["J'"]]
-        matchingUpperStates = matchingUpperStates[matchingUpperStates["Gamma"] == row["Gamma'"]]
-        matchingUpperStates["Difference"] = abs(row["E'"] - matchingUpperStates["E"])
-        matchingUpperStates = matchingUpperStates.sort_values(by="Difference")
-        if len(matchingUpperStates) == 1:
-            matchingUpperState = matchingUpperStates.head(1).squeeze()
-            row["Nb'"] = matchingUpperState["Nb"]
-        else:
-            row["Nb'"] = -1
-    else:
-        row["E\""] = -1000
-        row["Nb'"] = -1
-        row["Nb\""] = -1
+    # matchingLowerStates = matchingLowerStates[matchingLowerStates["v1"] == 0]
+    # matchingLowerStates = matchingLowerStates[matchingLowerStates["v3"] == 0]
+    # matchingLowerStates = matchingLowerStates[matchingLowerStates["v3"] == 0]
+    # matchingLowerStates = matchingLowerStates[matchingLowerStates["v4"] == 0]
+    # matchingLowerStates = matchingLowerStates[matchingLowerStates["v5"] == 0]
+    # matchingLowerStates = matchingLowerStates[matchingLowerStates["v6"] == 0]    
+    matchingLowerStates = matchingLowerStates[matchingLowerStates["J"] == row["J\""]]
+    matchingLowerStates = matchingLowerStates[matchingLowerStates["K'"] == row["K\""]]
+    matchingLowerStates = matchingLowerStates[matchingLowerStates["Gamma"] == row["Gamma\""]]
+    matchingLowerStates = matchingLowerStates[matchingLowerStates["pRot"] == row["GammaRot\""]]
+    matchingLowerStates = matchingLowerStates[matchingLowerStates["GammaVib"] == row["GammaVib\""]]
+    matchingLowerStates = matchingLowerStates[matchingLowerStates["inv"] == row["inv\""]]
+    # matchingLowerStates["Tag"] = matchingLowerStates["J"].astype(str) + "-" + matchingLowerStates["K'"].astype(str) + "-" + matchingLowerStates["inv"].astype(str) + "-" + matchingLowerStates["GammaVib"].astype(str) + "-" + matchingLowerStates["pRot"].astype(str) + "-" + matchingLowerStates["Gamma"].astype(str)
+    # matchingLowerStates = matchingLowerStates[matchingLowerStates["Tag"] == row["Tag\""]]
+    matchingLowerState = matchingLowerStates.sort_values(by="E").head(1).squeeze()
+    row["E\""] = matchingLowerState["E"]
+    row["Nb\""] = matchingLowerState["Nb"]
+    row["E'"] = row["E\""] + row["nu"]
+    matchingUpperStates = states[states["J"] == row["J'"]]
+    matchingUpperStates = matchingUpperStates[matchingUpperStates["Gamma"] == row["Gamma'"]]
+    matchingUpperStates["Difference"] = abs(row["E'"] - matchingUpperStates["E"])
+    matchingUpperStates = matchingUpperStates.sort_values(by="Difference")
+    matchingUpperState = matchingUpperStates.head(1).squeeze()
+    row["Nb'"] = matchingUpperState["Nb"]
     return row
 
 transitions = transitions.parallel_apply(lambda x:findBlockNumber(x, states), axis=1, result_type="expand")
