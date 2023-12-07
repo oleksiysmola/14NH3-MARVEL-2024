@@ -64,11 +64,22 @@ def findBlockNumber(row, states):
     row["Nb\""] = matchingLowerState["Nb"]
     row["E'"] = row["E\""] + row["nu"]
     matchingUpperStates = states[states["J"] == row["J'"]]
+    matchingUpperStates = matchingUpperStates[matchingUpperStates["K'"] == row["K'"]]
     matchingUpperStates = matchingUpperStates[matchingUpperStates["Gamma"] == row["Gamma'"]]
+    # matchingUpperStates = matchingUpperStates[matchingUpperStates["pRot"] == row["GammaRot'"]]
+    # matchingUpperStates = matchingUpperStates[matchingUpperStates["GammaVib"] == row["GammaVib'"]]
     matchingUpperStates["Difference"] = abs(row["E'"] - matchingUpperStates["E"])
     matchingUpperStates = matchingUpperStates.sort_values(by="Difference")
     matchingUpperState = matchingUpperStates.head(1).squeeze()
     row["Nb'"] = matchingUpperState["Nb"]
+    row["Calc'"] = matchingUpperState["E"]
+    row["nu1'"] = matchingUpperState["nu1"]
+    row["nu2'"] = matchingUpperState["nu2"]
+    row["nu3'"] = matchingUpperState["nu3"]
+    row["nu4'"] = matchingUpperState["nu4"]
+    row["L3'"] = matchingUpperState["L3"]
+    row["L4'"] = matchingUpperState["L4"]
+    row["inv'"] = matchingUpperState["inv"]
     return row
 
 transitions = transitions.parallel_apply(lambda x:findBlockNumber(x, states), axis=1, result_type="expand")
@@ -92,8 +103,17 @@ transitions["inv\""] = transitions["inv\""].map(inversionMapping)
 transitionsColumns = ["nu", "unc1", "unc2", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "inv'", "Gamma'", "Nb'",
                       "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "inv\"", "Gamma\"", "Nb\"", "Source"]
 
+transitionsColumnsComparison = ["nu", "unc1", "unc2", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "inv'", "GammaRot'", "GammaVib'", "Gamma'", "Nb'",
+                      "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "inv\"", "Gamma\"", "Nb\"", "Source", "E'", "Calc'"]
+transitionsWithStateFileComparison = transitions[transitionsColumnsComparison]
+transitionsWithStateFileComparison = transitionsWithStateFileComparison.sort_values(by=["J'", "Gamma'", "E'"])
 transitions = transitions[transitionsColumns]
 transitions = transitions.to_string(index=False, header=False)
 marvelFile = "86CoLeMarvel.txt"
 with open(marvelFile, "w+") as FileToWriteTo:
     FileToWriteTo.write(transitions)
+    
+transitionsWithStateFileComparison = transitionsWithStateFileComparison.to_string(index=False, header=False)
+comparisonFile = "86CoLeAgainstStatesFile.txt"
+with open(comparisonFile, "w+") as fileToWriteTo:
+    fileToWriteTo.write(transitionsWithStateFileComparison)
