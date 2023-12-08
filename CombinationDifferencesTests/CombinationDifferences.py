@@ -29,7 +29,8 @@ transitionsFiles = [
     "../23CaCeVo/Assigned23CaCeVoMarvel.transitions",
     "../23YaDeLa/23YaDeLa.txt",
     "../19SvRaVo/19SvRaVoMarvel.txt",
-    "../86CoLe/86CoLeMarvel.txt",
+    # "../86CoLe/86CoLeMarvel.txt",
+    "../18ZoCoOvKy/18ZoCoOvKyMarvel.txt",
 ]
 
 for transitionFile in transitionsFiles:
@@ -193,10 +194,6 @@ transitionsToRemove = [
     "19SvRaVo.35",
     "19SvRaVo.24",
     "19SvRaVo.11",
-    # "86CoLe.26", Reassigned instead
-    # "86CoLe.1", 
-    "86CoLe.28",
-    "86CoLe.3",
     # The above set of transitions were invalidated at a CD threshold of 0.05
     "89UrTuRaGu.476",
     "21CeCaCo.189",
@@ -217,10 +214,6 @@ transitionsToReassign = {
     "22CaCeVaCaa.2036": ["0-6-0-0-0-0-8-4-s-E'-308", None],
     "22CaCeVaCaa.4322": ["0-6-0-0-0-0-8-4-s-E'-308", None],
     "21CaCeBeCa.479": ["0-6-0-0-0-0-8-4-s-E'-307", None],
-    "86CoLe.26": ["1-4-1-3-1-3-1-1-a-A2'-916", None], #
-    "86CoLe.1":  ["1-4-1-3-1-3-1-1-a-A2'-916", None], #
-    "86CoLe.27": ["4-0-1-0-1-0-1-1-a-A2'-917", None], #
-    "86CoLe.2":  ["4-0-1-0-1-0-1-1-a-A2'-917", None], #
 }
 
 badLines = pd.read_csv("BadLines.txt", delim_whitespace=True)
@@ -230,7 +223,7 @@ allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, tra
 # Filtering
 Jupper = 1
 transitions = allTransitions[allTransitions["nu"] > 0]
-transitions = transitions[transitions["J'"] == Jupper]
+# transitions = transitions[transitions["J'"] == Jupper]
 print(transitions.head(20).to_string(index=False))
 
 def assignStateTags(row):
