@@ -29,8 +29,9 @@ transitionsFiles = [
     "../23CaCeVo/Assigned23CaCeVoMarvel.transitions",
     "../23YaDeLa/23YaDeLa.txt",
     "../19SvRaVo/19SvRaVoMarvel.txt",
+    "../24ZhAgSeSh/24ZhAgSeSh.txt",
     # "../86CoLe/86CoLeMarvel.txt",
-    "../18ZoCoOvKy/18ZoCoOvKyMarvel.txt",
+    # "../18ZoCoOvKy/18ZoCoOvKyMarvel.txt",
 ]
 
 for transitionFile in transitionsFiles:
@@ -227,7 +228,7 @@ badLines = pd.read_csv("BadLines.txt", delim_whitespace=True)
 allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, transitionsToRemove, transitionsToCorrect, transitionsToReassign, badLines), axis=1, result_type="expand")
 
 # Filtering
-Jupper = 4
+Jupper = 6
 transitions = allTransitions[allTransitions["nu"] > 0]
 transitions = transitions[transitions["J'"] == Jupper]
 print(transitions.head(20).to_string(index=False))
