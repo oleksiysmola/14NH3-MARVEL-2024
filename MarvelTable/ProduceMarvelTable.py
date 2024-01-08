@@ -59,7 +59,7 @@ for source in allTransitions["Source"]:
     medianUncertainty = "{0:1.3e}".format(round(allTransitions["MU"][source].squeeze(), 4-math.ceil(np.log10(allTransitions["MU"][source].squeeze()))))
     latexString += "\n"
     latexString += f"{source} "
-    latexString += "\cite{" + source + ".NH3} &"
+    latexString += "\cite{" + source + "} &"
     latexString += f" {minimumFrequency}-{maximumFrequency} &"
     latexString += f" {validatedTransitions}/{totalTransitions} &"
     latexString += f" {averageUncertainty} & {medianUncertainty}"
