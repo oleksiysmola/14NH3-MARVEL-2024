@@ -9,7 +9,8 @@ pandarallel.initialize(progress_bar=True)
 transitionsColumns = ["nu", "unc1", "unc2", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "inv'", "Gamma'", "Nb'",
                       "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "inv\"", "Gamma\"", "Nb\"", "Source"]
 
-allTransitions = pd.read_csv("../Marvel-14NH3-Main.txt", delim_whitespace=True, names=transitionsColumns)
+# allTransitions = pd.read_csv("../Marvel-14NH3-Main.txt", delim_whitespace=True, names=transitionsColumns)
+allTransitions = pd.read_csv("../Marvel-14NH3-2020.txt", delim_whitespace=True, names=transitionsColumns)
 
 def trimSourceTag(row):
     row["Source"] = row["Source"].split(".")[0]
@@ -76,7 +77,16 @@ latexString += "\\end{longtable}"
 # latexString += "\n"
 # latexString += "\\end{table}"
 
+citeAllString = "\cite{"
 
-tableFile = "MarvelTable.tex"
-with open(tableFile, "w+") as FileToWriteTo:
-    FileToWriteTo.write(latexString)
+for source in allTransitions["Source"]:
+    citeAllString += source
+    citeAllString += ","
+citeAllString += "}"
+# tableFile = "MarvelTable.tex"
+# with open(tableFile, "w+") as FileToWriteTo:
+#     FileToWriteTo.write(latexString)
+
+citeFile = "cite.tex"
+with open(citeFile, "w+") as FileToWriteTo:
+    FileToWriteTo.write(citeAllString)
