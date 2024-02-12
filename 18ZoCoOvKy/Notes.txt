@@ -1,0 +1,27 @@
+18ZoCoOvKy tables 2 and 3  provide empirical energy levels with comparisons 
+to variational computations. 
+These variational energies for the refined surface, using TROVE
+will be used to match to the CoYuTe line list and provide the block number. 
+States without a variational energy will be discarded
+
+Some lines have the same theoretical intensities and assignments
+
+18ZoCoOvKy.258
+18ZoCoOvKy.296
+18ZoCoOvKy.298
+18ZoCoOvKy.260
+Three possible upper states. Assigned 1794 and 1795. Each pair gives a single upper states
+through CDs.
+
+18ZoCoOvKy.300 is one of two assignments for an experimental line. No other transition to
+the same upper state as 18ZoCoOvKy.300 hence it is to be invalidated. The other proposed
+assignment 18ZoCoOvKy.301 is it forms a CD upper state with another transition.
+
+18ZoCoOvKy.107
+18ZoCoOvKy.108
+18ZoCoOvKy.148
+18ZoCoOvKy.149
+Two experimental transitions with each having two suggested 
+theoretical assignments. 18ZoCoOvKy.107 and 18ZoCoOvKy.148 
+are taken to be correct as the CD more closely agrees with 
+the empircal level from table 2.

@@ -195,7 +195,9 @@ transitionsToRemove = [
     "19SvRaVo.35",
     "19SvRaVo.24",
     "19SvRaVo.11",
-    "18ZoCoOvKy.283",
+    "18ZoCoOvKy.300",
+    "18ZoCoOvKy.108",
+    "18ZoCoOvKy.149",
     # The above set of transitions were invalidated at a CD threshold of 0.05
     "89UrTuRaGu.476",
     "21CeCaCo.189",
@@ -216,11 +218,6 @@ transitionsToReassign = {
     "22CaCeVaCaa.2036": ["0-6-0-0-0-0-8-4-s-E'-308", None],
     "22CaCeVaCaa.4322": ["0-6-0-0-0-0-8-4-s-E'-308", None],
     "21CaCeBeCa.479": ["0-6-0-0-0-0-8-4-s-E'-307", None],
-    "18ZoCoOvKy.258": ["5-0-1-1-0-0-1-1-a-A2'-1794", None],
-    "18ZoCoOvKy.296": ["5-0-1-1-0-0-1-1-a-A2'-1794", None],
-    "18ZoCoOvKy.326": ["6-0-0-0-0-0-3-2-a-E\"-8090", None],
-    "18ZoCoOvKy.252": ["6-0-0-0-0-0-3-2-a-E\"-8090", None],
-    "18ZoCoOvKy.315": ["5-0-1-1-0-0-3-3-a-E'-7950", None],
 }
 
 badLines = pd.read_csv("BadLines.txt", delim_whitespace=True)

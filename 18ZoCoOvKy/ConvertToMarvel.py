@@ -2,8 +2,8 @@ import pandas as pd
 from pandarallel import pandarallel
 pandarallel.initialize(progress_bar=True)
 
-transitionsColumns = ["nu", "unc1", "int", "J'", "K'", "J\"", "K\"", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "inv'", "-",
-                      "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "inv\"", "Int"]
+transitionsColumns = ["nu", "unc1", "int", "J'", "K'", "J\"", "K\"", "nu1'", "nu2'", "nu3'", "L3'", "nu4'", "L4'", "inv'", "-",
+                      "nu1\"", "nu2\"", "nu3\"", "L3\"", "nu4\"", "L4\"", "inv\"", "Int"]
 
 
 transitions = pd.read_csv("18ZoCoOvKy.txt", delim_whitespace=True, names=transitionsColumns)
@@ -122,6 +122,13 @@ def findBlockNumber(row, states, selectionRules):
     # row["inv'"] = matchingUpperState["inv"]
     row["Gamma'"] = matchingUpperState["Gamma"]
     row["Diff"] = matchingUpperState["Difference"]
+    if row["nu"] >= 15669.8166:
+        row["ExpRatio"] = row["int"]/0.422
+        row["CalcRatio"] = row["Int"]/(1.080000e-23)
+    else:
+        row["ExpRatio"] = row["int"]/0.05900
+        row["CalcRatio"] = row["Int"]/(8.790000e-25)
+    row["DiffRatio"] = row["ExpRatio"] - row["CalcRatio"]/row["ExpRatio"]
     return row
 
 transitions = transitions.parallel_apply(lambda x:findBlockNumber(x, states, selectionRules), axis=1, result_type="expand")
@@ -148,9 +155,12 @@ transitionsColumns = ["nu", "unc1", "unc2", "nu1'", "nu2'", "nu3'", "nu4'", "L3'
                       "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "inv\"", "Gamma\"", "Nb\"", "Source"]
 
 transitionsColumnsComparison = ["nu", "unc1", "unc2", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "inv'", "Gamma'", "Nb'",
-                      "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "inv\"", "Gamma\"", "Nb\"", "Source", "E'", "Calc'", "Diff"]
+                      "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "inv\"", "Gamma\"", "Nb\"", "Source", "E'", "Calc'", "Diff", "int", "Int", 
+                      "ExpRatio", "CalcRatio", "DiffRatio"]
 transitionsWithStateFileComparison = transitions[transitionsColumnsComparison]
 transitionsWithStateFileComparison = transitionsWithStateFileComparison.sort_values(by=["J'", "Gamma'", "E'"])
+intensityComparison = transitionsWithStateFileComparison[["nu", "int", "Int"]].sort_values(by="int")
+print(intensityComparison[intensityComparison["nu"] > 15669.8166].tail(50).to_string(index=False))
 transitions = transitions[transitionsColumns]
 transitions = transitions.to_string(index=False, header=False)
 marvelFile = "18ZoCoOvKyMarvel.txt"
