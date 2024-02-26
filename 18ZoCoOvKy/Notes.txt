@@ -54,3 +54,28 @@ transition.
 18ZoCoOvKy.279 
 Found an upper state that potentially matches with same rotational quantum numbers
 but vibrational assignment has been changed.
+
+ 18ZoCoOvKy.65
+18ZoCoOvKy.146
+18ZoCoOvKy.178
+Correspond to one of two fairly close lying states with same quantum number labels except Nb.
+We opt for the lower of the two states 2852 as that is the assignment corresponding to 
+the refined level given in 18ZoCoOvKy.
+
+18ZoCoOvKy.302
+18ZoCoOvKy.280
+Potentially three upper states with the same quantum numbers. We opt for the highest of the three
+5674 because that is the closest to the quoted refined level in the empirical energy levels list
+of 18ZoCoOvKy.
+
+18ZoCoOvKy.301
+18ZoCoOvKy.265
+No refined level given in paper, assigned closest state of same J-Gamma with same quantum numbers.
+
+18ZoCoOvKy.63
+18ZoCoOvKy.154
+18ZoCoOvKy.78
+Seem to form a combination difference to the same level, either that or seperate very
+close lying levels. 18ZoCoOvKy.63 and 18ZoCoOvKy.78 are reassigned as they have no corresponding
+empirical levels in the paper and combination difference differs by about 0.001 so the current 
+assumption is they have the same upper state as 18ZoCoOvKy.154.
