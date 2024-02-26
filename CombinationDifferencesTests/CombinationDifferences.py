@@ -31,7 +31,7 @@ transitionsFiles = [
     "../19SvRaVo/19SvRaVoMarvel.txt",
     "../24ZhAgSeSh/24ZhAgSeSh.txt",
     # "../86CoLe/86CoLeMarvel.txt",
-    # "../18ZoCoOvKy/18ZoCoOvKyMarvel.txt",
+    "../18ZoCoOvKy/18ZoCoOvKyMarvel.txt",
 ]
 
 for transitionFile in transitionsFiles:
@@ -195,14 +195,22 @@ transitionsToRemove = [
     "19SvRaVo.35",
     "19SvRaVo.24",
     "19SvRaVo.11",
-    "18ZoCoOvKy.300",
-    "18ZoCoOvKy.108",
-    "18ZoCoOvKy.149",
     # The above set of transitions were invalidated at a CD threshold of 0.05
     "89UrTuRaGu.476",
     "21CeCaCo.189",
     "89UrTuRaGu.564",
     # After the aforementioned validations here we remove the first set of very bad lines highlighted in MARVEL	
+    "18ZoCoOvKy.300",
+    "18ZoCoOvKy.108",
+    "18ZoCoOvKy.149",
+    "18ZoCoOvKy.173",
+    "18ZoCoOvKy.174",
+    "18ZoCoOvKy.59",
+    "18ZoCoOvKy.60",
+    "18ZoCoOvKy.101",
+    "18ZoCoOvKy.271",
+    "18ZoCoOvKy.133",
+    # The above are transitions from 18ZoCoOvky which we cannot find a reasonable match for in the states file
 ]
 
 transitionsToCorrect = {
@@ -218,6 +226,8 @@ transitionsToReassign = {
     "22CaCeVaCaa.2036": ["0-6-0-0-0-0-8-4-s-E'-308", None],
     "22CaCeVaCaa.4322": ["0-6-0-0-0-0-8-4-s-E'-308", None],
     "21CaCeBeCa.479": ["0-6-0-0-0-0-8-4-s-E'-307", None],
+    "18ZoCoOvKy.266": ["5-0-1-0-1-0-2-2-s-A2'-2777", None],
+    "18ZoCoOvKy.279": ["5-0-1-0-1-0-2-2-s-A2'-2777", None],
 }
 
 badLines = pd.read_csv("BadLines.txt", delim_whitespace=True)

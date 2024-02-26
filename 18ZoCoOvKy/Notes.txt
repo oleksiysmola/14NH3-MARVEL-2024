@@ -25,3 +25,32 @@ Two experimental transitions with each having two suggested
 theoretical assignments. 18ZoCoOvKy.107 and 18ZoCoOvKy.148 
 are taken to be correct as the CD more closely agrees with 
 the empircal level from table 2.
+
+18ZoCoOvKy.173
+18ZoCoOvKy.174
+ 18ZoCoOvKy.59
+ 18ZoCoOvKy.60
+Two experimental transitions each given two possible assignments corresponding to one CD upper state.
+These lines are invalidated since empirical levels from table 2 are the same for both possible upper
+upper states. Also 18ZoCoOvKy.101 has the upper state quantum numbers but the CD 
+is slightly different (within uncertainties though). Assumed to be of the same upper
+state implied by 18ZoCoOvKy.174 and 18ZoCoOvKy.60.
+
+18ZoCoOvKy.304
+18ZoCoOvKy.254
+Form a CD upper state potentially even with 18ZoCoOvKy.271 even though the latter has a different
+upper state label. The latter has been invalidated as it is ambigious which state in the states
+file is the corresponding match. 
+
+18ZoCoOvKy.133
+Same upper state quantum numbers as 
+18ZoCoOvKy.138
+18ZoCoOvKy.100
+but with the current assignment would correspond to another upper state. As we have two 
+transitions for the latter assignment, we retain these and invalidate the lone 18ZoCoOvKy.133 
+transition. 
+
+18ZoCoOvKy.266
+18ZoCoOvKy.279 
+Found an upper state that potentially matches with same rotational quantum numbers
+but vibrational assignment has been changed.
