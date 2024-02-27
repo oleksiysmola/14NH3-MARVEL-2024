@@ -213,6 +213,7 @@ transitionsToRemove = [
     "18ZoCoOvKy.288",
     "18ZoCoOvKy.283",
     "18ZoCoOvKy.257",
+    "18ZoCoOvKy.120",
     # The above are transitions from 18ZoCoOvky which we cannot find a reasonable match for in the states file
 ]
 
@@ -233,6 +234,8 @@ transitionsToReassign = {
     "18ZoCoOvKy.279": ["5-0-1-0-1-0-2-2-s-A2'-2777", None],
     "18ZoCoOvKy.63":  ["4-0-1-0-1-0-2-1-a-A2'-2888", None],
     "18ZoCoOvKy.78":  ["4-0-1-0-1-0-2-1-a-A2'-2888", None],
+    "18ZoCoOvKy.321": ["5-0-1-0-1-0-3-1-a-A2'-4108", None],
+    "18ZoCoOvKy.250": ["5-0-1-0-1-0-3-1-a-A2'-4108", None],
 }
 
 badLines = pd.read_csv("BadLines.txt", delim_whitespace=True)

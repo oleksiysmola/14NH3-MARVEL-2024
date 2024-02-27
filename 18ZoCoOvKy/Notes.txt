@@ -92,3 +92,29 @@ file and so is left invalidated for now.
 Have the same vibrational upper state labels but through CD correspond to different levels. One suitable 
 match is can be found in the vicinity of the empirical energy but it is not clear which of these two 
 states it would correspond to. Both lines are invalidated
+
+18ZoCoOvKy.316
+18ZoCoOvKy.244
+Same upper state with two possible matches in the states file. We take the closest energy level to be 
+the match.
+
+18ZoCoOvKy.321
+18ZoCoOvKy.250
+Not in emprical levels list. Match found in states file with different vibrational assignment. 
+Reassigned.
+
+18ZoCoOvKy.120 
+Quoted empirical level gives a substantial difference from CD lvl predicted by MARVEL ~ 60 cm-1
+Invalidated for the time being
+
+18ZoCoOvKy.71 
+~ 3 cm-1 difference between empirical level from table and that predicted by MARVEL 
+Invalidated for the time being.
+
+18ZoCoOvKy.180
+18ZoCoOvKy.181
+ 18ZoCoOvKy.32
+ 18ZoCoOvKy.33
+Two transitions each proposed two different assignments. Two close lying states in the states file to 
+match too as well so both scenarios are included. A third transition 18ZoCoOvKy.121 is assumed to 
+only go to the highest of these two states and so therefore breaks the energy degeneracy.
