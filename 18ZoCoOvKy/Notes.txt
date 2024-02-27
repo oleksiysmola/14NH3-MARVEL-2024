@@ -79,3 +79,16 @@ Seem to form a combination difference to the same level, either that or seperate
 close lying levels. 18ZoCoOvKy.63 and 18ZoCoOvKy.78 are reassigned as they have no corresponding
 empirical levels in the paper and combination difference differs by about 0.001 so the current 
 assumption is they have the same upper state as 18ZoCoOvKy.154.
+
+18ZoCoOvKy.288
+Has the same vibrational upper state assignment as 18ZoCoOvKy.291 and 18ZoCoOvKy.255 however through
+CD corresponds to a different upper state. The state corresponding to the latter two appears in the 
+empirical levels list and along with the corresponding refined energy so a match could be found in 
+the states file. For 18ZoCoOvKy.288 it is not clear which state is the corresponding one from the states
+file and so is left invalidated for now.
+
+18ZoCoOvKy.283
+18ZoCoOvKy.257
+Have the same vibrational upper state labels but through CD correspond to different levels. One suitable 
+match is can be found in the vicinity of the empirical energy but it is not clear which of these two 
+states it would correspond to. Both lines are invalidated
