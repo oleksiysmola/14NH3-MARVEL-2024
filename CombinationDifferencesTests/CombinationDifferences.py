@@ -236,6 +236,11 @@ transitionsToReassign = {
     "18ZoCoOvKy.78":  ["4-0-1-0-1-0-2-1-a-A2'-2888", None],
     "18ZoCoOvKy.321": ["5-0-1-0-1-0-3-1-a-A2'-4108", None],
     "18ZoCoOvKy.250": ["5-0-1-0-1-0-3-1-a-A2'-4108", None],
+    "18ZoCoOvKy.140": ["4-0-1-0-1-0-3-0-a-E\"-4042", None],
+    "18ZoCoOvKy.326": ["5-0-1-0-1-0-3-2-a-E\"-8093", None],
+    "18ZoCoOvKy.252": ["5-0-1-0-1-0-3-2-a-E\"-8093", None],
+    "18ZoCoOvKy.305": ["5-0-1-0-1-0-3-3-a-E'-7950", None],
+    "18ZoCoOvKy.263": ["5-0-1-0-1-0-3-3-a-E'-7950", None],
 }
 
 badLines = pd.read_csv("BadLines.txt", delim_whitespace=True)

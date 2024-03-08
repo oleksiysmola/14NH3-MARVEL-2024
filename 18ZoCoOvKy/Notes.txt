@@ -118,3 +118,16 @@ Invalidated for the time being.
 Two transitions each proposed two different assignments. Two close lying states in the states file to 
 match too as well so both scenarios are included. A third transition 18ZoCoOvKy.121 is assumed to 
 only go to the highest of these two states and so therefore breaks the energy degeneracy.
+
+18ZoCoOvKy.140 seems to form a CD level with 18ZoCoOvKy.42 which is assigned to the a state
+whereas the former is assigned to the s state. Since the CD agrees with the empirical 
+value of Table 2 which is the a state, we reassign 18ZoCoOvKy.140 to the a state
+
+18ZoCoOvKy.319
+18ZoCoOvKy.289
+18ZoCoOvKy.326
+18ZoCoOvKy.252
+Form two seperate combination differences, both empirical levels appear in Table 3.
+First empirical level has no matching refined level for comparison. 
+Second empirical level does. We change Nb number for the second to more closely match
+the quoted refined level. Vibrational quantum numbers also reassigned to match.
