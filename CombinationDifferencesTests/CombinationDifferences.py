@@ -214,7 +214,13 @@ transitionsToRemove = [
     "18ZoCoOvKy.283",
     "18ZoCoOvKy.257",
     "18ZoCoOvKy.120",
-    "18ZoCoOvKy.282"
+    "18ZoCoOvKy.282",
+    # "18ZoCoOvKy.45",
+    # "18ZoCoOvKy.124",
+    "18ZoCoOvKy.54",
+    # "18ZoCoOvKy.147",
+    # "18ZoCoOvKy.61",
+    "18ZoCoOvKy.201",
     # The above are transitions from 18ZoCoOvky which we cannot find a reasonable match for in the states file
 ]
 
@@ -242,6 +248,14 @@ transitionsToReassign = {
     "18ZoCoOvKy.252": ["5-0-1-0-1-0-3-2-a-E\"-8093", None],
     "18ZoCoOvKy.305": ["5-0-1-0-1-0-3-3-a-E'-7950", None],
     "18ZoCoOvKy.263": ["5-0-1-0-1-0-3-3-a-E'-7950", None],
+    "18ZoCoOvKy.293": ["5-0-1-0-1-0-4-3-a-E\"-10322", None],
+    "18ZoCoOvKy.187": ["4-0-1-0-1-0-4-3-a-E'-5156", None],
+    "18ZoCoOvKy.212": ["4-0-1-0-1-0-4-2-s-E'-5177", None],
+    "18ZoCoOvKy.195": ["4-0-1-0-1-0-4-2-s-E'-5177", None],
+    "18ZoCoOvKy.18":  ["4-0-1-0-1-0-4-2-s-E'-5177", None],
+    "18ZoCoOvKy.117": ["5-0-0-0-0-0-4-2-s-E'-5179", None],
+    "18ZoCoOvKy.19":  ["5-0-0-0-0-0-4-2-s-E'-5179", None],
+    "18ZoCoOvKy.198": ["5-0-0-0-0-0-4-2-s-E'-5179", None],
 }
 
 badLines = pd.read_csv("BadLines.txt", delim_whitespace=True)

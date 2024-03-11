@@ -142,7 +142,7 @@ is the lower of the two states in the states file.
 
 18ZoCoOvKy.243
 18ZoCoOvKy.295
-Appear to correspond to two different upper states through CD. Two states can in this region
+Appear to correspond to two different upper states through CD. Two states can
 can be found to match them although giving a differing refined energy to the one offered in 
 Table 3.
 
@@ -153,4 +153,56 @@ Invalidated
  18ZoCoOvKy.45
 18ZoCoOvKy.124
 CD level has no refined level in Table 2 and two close matches in the states file. Assigned
-closest match.
+closest match. 
+
+18ZoCoOvKy.337
+18ZoCoOvKy.294
+Empirical level not given but a state is nonetheless found in the states file.
+
+18ZoCoOvKy.54
+Empirical level not given in Table 2 and states file contains three possible matches.
+Invalidated.
+
+ 18ZoCoOvKy.50
+18ZoCoOvKy.192
+18ZoCoOvKy.162
+18ZoCoOvKy.194
+ 18ZoCoOvKy.52
+18ZoCoOvKy.111
+ 18ZoCoOvKy.16
+For some reason the refined levels are flipped when matched to the empirical levels of Table 2.
+Three close matches exist within 0.1 cm-1 of the adjacent level. We choose the two highest 
+energy states to correspond to the upper state energies.
+
+18ZoCoOvKy.293
+18ZoCoOvKy.334
+Assigned differently yet appear to correspond to the same CD level. The former has no empircal
+level given in Table 3 whereas the latter does. 18ZoCoOvKy.293 is reassigned to match the 
+assignment of the former. 
+
+18ZoCoOvKy.147
+ 18ZoCoOvKy.61
+One CD level with two possible matches around ~ 9 cm-1 off the empirical value.
+Quoted refined level from Table 2 also ~ 4 cm-1 off values that could match in states file.
+
+ 18ZoCoOvKy.43
+18ZoCoOvKy.187
+ 18ZoCoOvKy.14
+18ZoCoOvKy.103
+18ZoCoOvKy.161
+All seem to correspond to same upper state through CD test but 18ZoCoOvKy.187 is assigned
+to the s state whereas the rest are assigned the to the a state. 18ZoCoOvKy.187 is reassigned
+to the a state. 
+
+18ZoCoOvKy.212
+18ZoCoOvKy.195
+ 18ZoCoOvKy.18
+18ZoCoOvKy.117
+ 18ZoCoOvKy.19
+18ZoCoOvKy.198
+Two CD states and two possible matches in the states file yet with current assignment
+the order in the states file would be different to their empirical ordering. The vibrational
+assignments have therefore been swapped.
+
+18ZoCoOvKy.201
+No matches obvious matches found in states file. And empirical level not present in Table 2.
