@@ -214,6 +214,7 @@ transitionsToRemove = [
     "18ZoCoOvKy.283",
     "18ZoCoOvKy.257",
     "18ZoCoOvKy.120",
+    "18ZoCoOvKy.282"
     # The above are transitions from 18ZoCoOvky which we cannot find a reasonable match for in the states file
 ]
 

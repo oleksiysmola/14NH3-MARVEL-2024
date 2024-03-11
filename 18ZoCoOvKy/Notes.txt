@@ -131,3 +131,26 @@ Form two seperate combination differences, both empirical levels appear in Table
 First empirical level has no matching refined level for comparison. 
 Second empirical level does. We change Nb number for the second to more closely match
 the quoted refined level. Vibrational quantum numbers also reassigned to match.
+
+18ZoCoOvKy.305
+18ZoCoOvKy.263
+18ZoCoOvKy.315
+18ZoCoOvKy.281
+Two CD levels for two closish states. Empirical level for both, however upper state has no 
+refined level in Table 3. We reassign vibrational quantum numbers of first state and assume it
+is the lower of the two states in the states file. 
+
+18ZoCoOvKy.243
+18ZoCoOvKy.295
+Appear to correspond to two different upper states through CD. Two states can in this region
+can be found to match them although giving a differing refined energy to the one offered in 
+Table 3.
+
+18ZoCoOvKy.282
+No matching refined level in Table 3 or similarly assigned state in the states file. 
+Invalidated
+
+ 18ZoCoOvKy.45
+18ZoCoOvKy.124
+CD level has no refined level in Table 2 and two close matches in the states file. Assigned
+closest match.
