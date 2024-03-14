@@ -206,3 +206,19 @@ assignments have therefore been swapped.
 
 18ZoCoOvKy.201
 No matches obvious matches found in states file. And empirical level not present in Table 2.
+
+18ZoCoOvKy.172
+ 18ZoCoOvKy.40
+CD level with two possible matches in states file. Two empirical levels in table 2.
+The CD lvl for the other state is not found but the 18ZoCoOvKy.172 and 18ZoCoOvKy.40
+correspond to the lower of the two empirical levels and so is assigned the lower energy
+state in the states file.
+
+  18ZoCoOvKy.7
+18ZoCoOvKy.214
+Matching empirical level has suggests different refined level to possible matches in 
+states file. Closest match in states file is chosen.
+
+18ZoCoOvKy.131
+No states that seem to match in states file and no empirical level in Table 2.
+Invalidated
