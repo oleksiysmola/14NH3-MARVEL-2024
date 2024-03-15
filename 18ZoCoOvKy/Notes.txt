@@ -222,3 +222,15 @@ states file. Closest match in states file is chosen.
 18ZoCoOvKy.131
 No states that seem to match in states file and no empirical level in Table 2.
 Invalidated
+
+18ZoCoOvKy.274
+18ZoCoOvKy.330
+Suggested refined level in Table 3 is around 10 cm-1 below the a close match in 
+the states file.
+
+18ZoCoOvKy.135
+No refined level in Table 2. Assigned closest match.
+
+ 18ZoCoOvKy.24
+18ZoCoOvKy.168
+Difference in predicted CD level > uncertainties of transition. Invalidated
