@@ -4,6 +4,11 @@ These variational energies for the refined surface, using TROVE
 will be used to match to the CoYuTe line list and provide the block number. 
 States without a variational energy will be discarded
 
+Here is a list of lines noted to have questionable assignments and yet form a level through CD
+18142.49121 0.034 0.034 6 0 0 0 0 0 3 3 a  E'  7929 0 0 0 0 0 0 2 1 s  E" 2 18ZoCoOvKy.305 
+18058.27309 0.034 0.034 6 0 0 0 0 0 3 3 a  E'  7929 0 0 0 0 0 0 4 4 a  E" 1 18ZoCoOvKy.263 
+
+
 Some lines have the same theoretical intensities and assignments
 
 18ZoCoOvKy.258
@@ -136,9 +141,11 @@ the quoted refined level. Vibrational quantum numbers also reassigned to match.
 18ZoCoOvKy.263
 18ZoCoOvKy.315
 18ZoCoOvKy.281
-Two CD levels for two closish states. Empirical level for both, however upper state has no 
-refined level in Table 3. We reassign vibrational quantum numbers of first state and assume it
-is the lower of the two states in the states file. 
+Three CD levels for two closish states. Empirical level for both, however 
+upper state has no refined level in Table 3. For now we assume the two 
+matches belong to 18ZoCoOvKy.315 and 18ZoCoOvKy.281 respectively, as 
+two distinct states Nb = 7050, 7951. As 18ZoCoOvKy.305, 18ZoCoOvKy.263 form 
+a CD level we assign them to state Nb = 7929 but this is a tenious assignment.
 
 18ZoCoOvKy.243
 18ZoCoOvKy.295
@@ -262,3 +269,8 @@ Refined level in Table 2 > 10 cm-1 off so opted for closer match in states file.
  18ZoCoOvKy.69
 Match in states file has different vibrational assignment to that given in paper.
 We change vibrational labels to that given in the states file.
+
+18ZoCoOvKy.23
+Invalidated as it falls between two levels confirmed through CD and have 
+corresponding empirical and refined levels in Table 2. No matches found for
+18ZoCoOvKy.23.

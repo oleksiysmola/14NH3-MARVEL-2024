@@ -71,7 +71,8 @@ def removeTransitions(row, transitionsToRemove, transitionsToCorrect, transition
                 row["unc1"] = uncertaintyScaleFactor*badLine["Uncertainty"]
                 row["unc2"] = uncertaintyScaleFactor*badLine["Uncertainty"]
     if row["unc1"] >= maximumUncertainty:
-        if row["nu"] > 0:
+        # Allow transitions above 10000 cm-1 to have a larger uncertainty
+        if row["nu"] > 0 and row["nu"] < 10000:
             row["nu"] = -row["nu"]
     return row
 
@@ -225,6 +226,9 @@ transitionsToRemove = [
     "18ZoCoOvKy.24",
     "18ZoCoOvKy.168",
     "18ZoCoOvKy.234",
+    "18ZoCoOvKy.232",
+    "18ZoCoOvKy.71",
+    "18ZoCoOvKy.23",
     # The above are transitions from 18ZoCoOvky which we cannot find a reasonable match for in the states file
 ]
 
@@ -250,8 +254,8 @@ transitionsToReassign = {
     "18ZoCoOvKy.140": ["4-0-1-0-1-0-3-0-a-E\"-4042", None],
     "18ZoCoOvKy.326": ["5-0-1-0-1-0-3-2-a-E\"-8093", None],
     "18ZoCoOvKy.252": ["5-0-1-0-1-0-3-2-a-E\"-8093", None],
-    "18ZoCoOvKy.305": ["5-0-1-0-1-0-3-3-a-E'-7950", None],
-    "18ZoCoOvKy.263": ["5-0-1-0-1-0-3-3-a-E'-7950", None],
+    "18ZoCoOvKy.305": ["5-0-1-0-1-0-3-3-a-E'-7929", None],
+    "18ZoCoOvKy.263": ["5-0-1-0-1-0-3-3-a-E'-7929", None],
     "18ZoCoOvKy.293": ["5-0-1-0-1-0-4-3-a-E\"-10322", None],
     "18ZoCoOvKy.187": ["4-0-1-0-1-0-4-3-a-E'-5156", None],
     "18ZoCoOvKy.212": ["4-0-1-0-1-0-4-2-s-E'-5177", None],
@@ -273,7 +277,7 @@ allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, tra
 # Filtering
 Jupper = 6
 transitions = allTransitions[allTransitions["nu"] > 0]
-transitions = transitions[transitions["J'"] == Jupper]
+# transitions = transitions[transitions["J'"] == Jupper]
 print(transitions.head(20).to_string(index=False))
 
 def assignStateTags(row):
