@@ -2,8 +2,8 @@ import pandas as pd
 from pandarallel import pandarallel
 pandarallel.initialize(progress_bar=True)
 
-def writeDataFrameToFile(dataFrame, fileName):
-    dataFrame = dataFrame.to_string(index=False)
+def writeDataFrameToFile(dataFrame, fileName, header=True):
+    dataFrame = dataFrame.to_string(index=False, header=header)
     with open(fileName, "w+") as fileToWriteTo:
         fileToWriteTo.write(dataFrame)
 
@@ -48,9 +48,14 @@ def findMatchingStates(row, states):
         row["Calc'"] = matchingUpperState["E"]
         row["Nb'"] = matchingUpperState["Nb"]
         row["Obs-Calc'"] = row["E'"] - row["Calc'"]
+        row["CoYuTeBandTag"] = str(matchingUpperState["nu1"]) + "-" + str(matchingUpperState["nu2"])  + "-" + str(matchingUpperState["nu3"])  + "-" + str(matchingUpperState["nu4"])  + "-" + str(matchingUpperState["L3"])  + "-" + str(matchingUpperState["L4"]) +  "-" + str(matchingUpperState["inv"])
+        row["BandTag"] = str(row["nu1'"]) + "-" + str(row["nu2'"])  + "-" + str(row["nu3'"])  + "-" + str(row["nu4'"])  + "-" + str(row["L3'"])  + "-" + str(row["L4'"]) +  "-" + str(row["i'"])
+        row["BandMatch"] = row["CoYuTeBandTag"] == row["BandTag"]
     else:
         row["Calc'"] = -1000
         row["Nb'"] = -1000
+        row["CoYuTeBandTag"] = "-1000"
+        row["BandMatch"] = False
     return row
 
 transitions["Source"] = pd.DataFrame({"Source": [f"17BaPoYuTe.{i + 1}" for i in range(len(transitions))]})
@@ -72,11 +77,13 @@ inversionMap = {
 }
 transitions["i'"] = transitions["i'"].map(inversionMap)
 transitions["i\""] = transitions["i\""].map(inversionMap)
-transitionsToMarvel = transitions[["nu", "unc1", "unc2", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "i'", "Gtot'", "Nb'",
+transitionsToMarvel = transitions[transitions["BandMatch"]][["nu", "unc1", "unc2", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "i'", "Gtot'", "Nb'",
                       "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "i\"", "Gtot\"", "Nb\"", "Source"]]
-writeDataFrameToFile(transitionsToMarvel, "17BaPoYuTe-MARVEL.txt")
+writeDataFrameToFile(transitionsToMarvel, "17BaPoYuTe-MARVEL.txt", header=False)
 transitionsComparison = transitions[["nu", "unc1", "unc2", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "i'", "Gtot'", "Nb'",
-                      "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "i\"", "Gtot\"", "Nb\"", "E'", "Calc'", "Obs-Calc'", "Source", "Method"]]
+                      "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "i\"", "Gtot\"", "Nb\"", "E'", "Calc'", "Obs-Calc'", "Source", "Method", "BandMatch"]]
+print("\n")
+print("Number of transitions with matching bands: ", len(transitionsComparison[transitionsComparison["BandMatch"]]))
 writeDataFrameToFile(transitionsComparison, "17BaPoYuTeAgainstStatesFile.txt")
 print("\n")
 print("Number of CD assignments: ", len(transitions[transitions["Method"] == "CD"]))
