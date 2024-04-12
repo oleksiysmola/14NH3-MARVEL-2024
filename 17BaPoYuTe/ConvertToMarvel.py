@@ -1,7 +1,7 @@
 import pandas as pd
 from pandarallel import pandarallel
 pandarallel.initialize(progress_bar=True)
-
+pd.set_option('display.precision', 10)
 def writeDataFrameToFile(dataFrame, fileName, header=True):
     dataFrame = dataFrame.to_string(index=False, header=header)
     with open(fileName, "w+") as fileToWriteTo:
@@ -77,11 +77,11 @@ inversionMap = {
 }
 transitions["i'"] = transitions["i'"].map(inversionMap)
 transitions["i\""] = transitions["i\""].map(inversionMap)
-transitionsToMarvel = transitions[transitions["BandMatch"]][["nu", "unc1", "unc2", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "i'", "Gtot'", "Nb'",
+transitionsToMarvel = transitions[["nu", "unc1", "unc2", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "i'", "Gtot'", "Nb'",
                       "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "i\"", "Gtot\"", "Nb\"", "Source"]]
 writeDataFrameToFile(transitionsToMarvel, "17BaPoYuTe-MARVEL.txt", header=False)
 transitionsComparison = transitions[["nu", "unc1", "unc2", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "i'", "Gtot'", "Nb'",
-                      "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "i\"", "Gtot\"", "Nb\"", "E'", "Calc'", "Obs-Calc'", "Source", "Method", "BandMatch"]]
+                      "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "i\"", "Gtot\"", "Nb\"", "E'", "Calc'", "Obs-Calc'", "ErrByte", "Source", "Method", "BandMatch"]]
 print("\n")
 print("Number of transitions with matching bands: ", len(transitionsComparison[transitionsComparison["BandMatch"]]))
 writeDataFrameToFile(transitionsComparison, "17BaPoYuTeAgainstStatesFile.txt")
