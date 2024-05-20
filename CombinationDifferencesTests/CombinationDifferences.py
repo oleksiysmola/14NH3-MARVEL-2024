@@ -200,6 +200,9 @@ transitionsToRemove = [
     "19SvRaVo.11",
     "16BaYuTeBe.1954",
     "16BaYuTeBe.627",
+    "16BaYuTeBe.1785",
+    "16BaYuTeBe.98",
+    "16BaYuTeBe.81",
     # The above set of transitions were invalidated at a CD threshold of 0.05
     "89UrTuRaGu.476",
     "21CeCaCo.189",
@@ -279,7 +282,7 @@ badLines = pd.read_csv("BadLines.txt", delim_whitespace=True)
 allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, transitionsToRemove, transitionsToCorrect, transitionsToReassign, badLines), axis=1, result_type="expand")
 
 # Filtering
-Jupper = 2
+Jupper = 5
 transitions = allTransitions[allTransitions["nu"] > 0]
 transitions = transitions[transitions["J'"] == Jupper]
 print(transitions.head(20).to_string(index=False))
