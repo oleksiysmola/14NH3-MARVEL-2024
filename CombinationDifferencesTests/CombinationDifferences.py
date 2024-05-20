@@ -33,6 +33,7 @@ transitionsFiles = [
     # "../86CoLe/86CoLeMarvel.txt",
     "../18ZoCoOvKy/18ZoCoOvKyMarvel.txt",
     "../17BaPoYuTe/17BaPoYuTe-MARVEL.txt",
+    "../16BaYuTeBe/16BaYuTeBe-MARVEL.txt",
 ]
 
 for transitionFile in transitionsFiles:
@@ -197,6 +198,8 @@ transitionsToRemove = [
     "19SvRaVo.35",
     "19SvRaVo.24",
     "19SvRaVo.11",
+    "16BaYuTeBe.1954",
+    "16BaYuTeBe.627",
     # The above set of transitions were invalidated at a CD threshold of 0.05
     "89UrTuRaGu.476",
     "21CeCaCo.189",
@@ -276,9 +279,9 @@ badLines = pd.read_csv("BadLines.txt", delim_whitespace=True)
 allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, transitionsToRemove, transitionsToCorrect, transitionsToReassign, badLines), axis=1, result_type="expand")
 
 # Filtering
-Jupper = 6
+Jupper = 2
 transitions = allTransitions[allTransitions["nu"] > 0]
-# transitions = transitions[transitions["J'"] == Jupper]
+transitions = transitions[transitions["J'"] == Jupper]
 print(transitions.head(20).to_string(index=False))
 
 def assignStateTags(row):
