@@ -282,9 +282,9 @@ badLines = pd.read_csv("BadLines.txt", delim_whitespace=True)
 allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, transitionsToRemove, transitionsToCorrect, transitionsToReassign, badLines), axis=1, result_type="expand")
 
 # Filtering
-Jupper = 5
+Jupper = 6
 transitions = allTransitions[allTransitions["nu"] > 0]
-transitions = transitions[transitions["J'"] == Jupper]
+# transitions = transitions[transitions["J'"] == Jupper]
 print(transitions.head(20).to_string(index=False))
 
 def assignStateTags(row):
