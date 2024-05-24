@@ -236,6 +236,8 @@ transitionsToRemove = [
     "18ZoCoOvKy.232",
     "18ZoCoOvKy.71",
     "18ZoCoOvKy.23",
+    "18ZoCoOvKy.74",
+    "18ZoCoOvKy.227",
     # The above are transitions from 18ZoCoOvky which we cannot find a reasonable match for in the states file
 ]
 
@@ -252,29 +254,33 @@ transitionsToReassign = {
     "22CaCeVaCaa.2036": ["0-6-0-0-0-0-8-4-s-E'-308", None],
     "22CaCeVaCaa.4322": ["0-6-0-0-0-0-8-4-s-E'-308", None],
     "21CaCeBeCa.479": ["0-6-0-0-0-0-8-4-s-E'-307", None],
-    "18ZoCoOvKy.266": ["5-0-1-0-1-0-2-2-s-A2'-2777", None],
-    "18ZoCoOvKy.279": ["5-0-1-0-1-0-2-2-s-A2'-2777", None],
+    # "18ZoCoOvKy.266": ["5-0-1-0-1-0-2-2-s-A2'-2777", None],
+    # "18ZoCoOvKy.279": ["5-0-1-0-1-0-2-2-s-A2'-2777", None],
     "18ZoCoOvKy.63":  ["4-0-1-0-1-0-2-1-a-A2'-2888", None],
     "18ZoCoOvKy.78":  ["4-0-1-0-1-0-2-1-a-A2'-2888", None],
-    "18ZoCoOvKy.321": ["5-0-1-0-1-0-3-1-a-A2'-4108", None],
-    "18ZoCoOvKy.250": ["5-0-1-0-1-0-3-1-a-A2'-4108", None],
+    # "18ZoCoOvKy.321": ["5-0-1-0-1-0-3-1-a-A2'-4108", None],
+    # "18ZoCoOvKy.250": ["5-0-1-0-1-0-3-1-a-A2'-4108", None],
     "18ZoCoOvKy.140": ["4-0-1-0-1-0-3-0-a-E\"-4042", None],
-    "18ZoCoOvKy.326": ["5-0-1-0-1-0-3-2-a-E\"-8093", None],
-    "18ZoCoOvKy.252": ["5-0-1-0-1-0-3-2-a-E\"-8093", None],
-    "18ZoCoOvKy.305": ["5-0-1-0-1-0-3-3-a-E'-7929", None],
-    "18ZoCoOvKy.263": ["5-0-1-0-1-0-3-3-a-E'-7929", None],
+    # "18ZoCoOvKy.326": ["5-0-1-0-1-0-3-2-a-E\"-8093", None],
+    # "18ZoCoOvKy.252": ["5-0-1-0-1-0-3-2-a-E\"-8093", None],
+    # "18ZoCoOvKy.305": ["5-0-1-0-1-0-3-3-a-E'-7929", None],
+    # "18ZoCoOvKy.263": ["5-0-1-0-1-0-3-3-a-E'-7929", None],
     "18ZoCoOvKy.293": ["5-0-1-0-1-0-4-3-a-E\"-10322", None],
     "18ZoCoOvKy.187": ["4-0-1-0-1-0-4-3-a-E'-5156", None],
-    "18ZoCoOvKy.212": ["4-0-1-0-1-0-4-2-s-E'-5177", None],
-    "18ZoCoOvKy.195": ["4-0-1-0-1-0-4-2-s-E'-5177", None],
-    "18ZoCoOvKy.18":  ["4-0-1-0-1-0-4-2-s-E'-5177", None],
-    "18ZoCoOvKy.117": ["5-0-0-0-0-0-4-2-s-E'-5179", None],
-    "18ZoCoOvKy.19":  ["5-0-0-0-0-0-4-2-s-E'-5179", None],
-    "18ZoCoOvKy.198": ["5-0-0-0-0-0-4-2-s-E'-5179", None],
-    "18ZoCoOvKy.275": ["5-0-1-0-1-0-5-4-a-A2\"-6204", None],
-    "18ZoCoOvKy.331": ["5-0-1-0-1-0-5-4-a-A2\"-6204", None],
-    "18ZoCoOvKy.224": ["5-0-0-0-0-0-7-6-a-E'-8434", None],
-    "18ZoCoOvKy.69":  ["5-0-0-0-0-0-7-6-a-E'-8434", None],
+    # "18ZoCoOvKy.212": ["4-0-1-0-1-0-4-2-s-E'-5177", None],
+    # "18ZoCoOvKy.195": ["4-0-1-0-1-0-4-2-s-E'-5177", None],
+    # "18ZoCoOvKy.18":  ["4-0-1-0-1-0-4-2-s-E'-5177", None],
+    # "18ZoCoOvKy.117": ["5-0-0-0-0-0-4-2-s-E'-5179", None],
+    "18ZoCoOvKy.19":  ["4-0-1-0-1-0-4-2-s-E'-5179", None],
+    # "18ZoCoOvKy.198": ["5-0-0-0-0-0-4-2-s-E'-5179", None],
+    # "18ZoCoOvKy.275": ["5-0-1-0-1-0-5-4-a-A2\"-6204", None],
+    # "18ZoCoOvKy.331": ["5-0-1-0-1-0-5-4-a-A2\"-6204", None],
+    # "18ZoCoOvKy.224": ["5-0-0-0-0-0-7-6-a-E'-8434", None], 
+    # "18ZoCoOvKy.69":  ["5-0-0-0-0-0-7-6-a-E'-8434", None],
+    "22CaCeVaCa.1060": ["0-1-0-2-0-2-1-0-s-A2'-13", None], # Assignments made by Cacciani 
+    "22CaCeVaCa.1364": ["0-1-0-2-0-2-1-1-s-E\"-19", None], # to a certain J-Symmetry block and
+    "22CaCeVaCaa.2829": ["1-0-0-1-0-1-1-1-s-E\"-37", None], # block number but disagree with
+    "22CaCeVaCaa.2672": ["1-0-0-1-0-1-1-1-s-E\"-37", None], # previous assignments
 }
 
 badLines = pd.read_csv("BadLines.txt", delim_whitespace=True)
