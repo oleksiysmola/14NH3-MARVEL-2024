@@ -241,6 +241,7 @@ transitionsToRemove = [
     "18ZoCoOvKy.74",
     "18ZoCoOvKy.227",
     # The above are transitions from 18ZoCoOvky which we cannot find a reasonable match for in the states file
+    "22HuSuTo.679",
 ]
 
 transitionsToCorrect = {
@@ -280,6 +281,10 @@ transitionsToReassign = {
     # "18ZoCoOvKy.224": ["5-0-0-0-0-0-7-6-a-E'-8434", None], 
     # "18ZoCoOvKy.69":  ["5-0-0-0-0-0-7-6-a-E'-8434", None],
     "22HuSuTo.1180" : [None, "0-0-0-0-0-0-4-2-a-E\"-2"], # Lower state appears to have been assigned wrong inversion number
+    "22HuSuTo.692"  : [None, "0-0-0-0-0-0-9-5-a-E'-3"], # Lower state appears to have been assigned wrong inversion number
+    "22HuSuTo.239"  : ["0-1-1-1-1-1-1-1-s-E\"-272", None],
+    "22HuSuTo.238"  : ["0-1-1-1-1-1-1-1-s-E\"-272", None],
+    "22HuSuTo.237"  : ["0-1-1-1-1-1-1-1-s-E\"-272", None],
     "22CaCeVaCa.1539" : ["0-1-0-2-0-2-1-0-s-A2'-13", None],     # Assignments made by Cacciani 
     "22CaCeVaCa.1060" : ["0-1-0-2-0-2-1-0-s-A2'-13", None],     # to a certain J-Symmetry block and
     "22CaCeVaCa.1364" : ["0-1-0-2-0-2-1-1-s-E\"-19", None],     # block number but disagree with
@@ -391,6 +396,7 @@ transitionsToReassign = {
     "22CaCeVaCaa.2081" : ["0-0-1-1-1-1-4-1-s-E\"-110", None], # Block Numbers manually swapped to correct energy ordering 
     "22CaCeVaCaa.2649" : ["0-0-1-1-1-1-4-1-s-E\"-110", None], # Block Numbers manually swapped to correct energy ordering 
     "22CaCeVaCaa.1959" : ["0-0-1-1-1-1-4-1-s-E\"-110", None], # Block Numbers manually swapped to correct energy ordering
+          "96BrMa.528" : ["0-0-1-1-1-1-4-1-s-E\"-110", None], # Block Numbers manually swapped to correct energy ordering
           "96BrMa.193" : ["0-0-1-1-1-1-4-1-s-E\"-110", None], # Block Numbers manually swapped to correct energy ordering
           "96BrMa.382" : ["0-0-1-1-1-1-4-1-s-E\"-110", None], # Block Numbers manually swapped to correct energy ordering
           "96BrMa.356" : ["0-0-1-1-1-1-4-1-s-E\"-110", None], # Block Numbers manually swapped to correct energy ordering
@@ -979,6 +985,44 @@ transitionsToReassign = {
     "22CaCeVaCaa.4577" : ["1-0-0-1-0-1-12-12-a-E\"-224", None],
     "22CaCeVaCaa.4697" : ["1-0-0-1-0-1-13-13-s-A2\"-115", None],
     "22CaCeVaCaa.1453" : ["1-0-0-1-0-1-13-13-s-A2\"-115", None],
+       "23CaCeVo.3285" : ["0-1-1-1-1-1-7-3-a-E'-282", None],   # Reassigned for consistency with other Cacciani/Huang lines
+       "23CaCeVo.1658" : ["0-1-1-1-1-1-7-3-a-E'-282", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.846" : ["0-1-1-1-1-1-7-3-a-E'-282", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.3285" : ["0-1-1-1-1-1-7-3-a-E'-282", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.1658" : ["0-1-1-1-1-1-7-3-a-E'-282", None],   # Reassigned for consistency with other Cacciani/Huang lines
+         "23CaCeVo.846" : ["0-1-1-1-1-1-7-3-a-E'-282", None],   # Reassigned for consistency with other Cacciani/Huang lines
+     "22CaCeVaCaa.4499" : ["0-1-1-1-1-1-8-8-s-E'-285", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.2820" : ["0-1-1-1-1-1-8-8-s-E'-285", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.2821" : ["0-1-1-1-1-1-8-8-s-E'-285", None],   # Reassigned for consistency with other Cacciani/Huang lines
+     "22CaCeVaCaa.4500" : ["0-1-1-1-1-1-8-8-s-E'-285", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.2945" : ["0-1-1-1-1-1-8-8-s-E'-285", None],   # Reassigned for consistency with other Cacciani/Huang lines
+       "21CaCeBeCa.608" : ["0-1-1-1-1-1-8-8-s-E'-285", None],   # Reassigned for consistency with other Cacciani/Huang lines
+      "21CaCeBeCa.1156" : ["0-1-1-1-1-1-8-8-s-E'-285", None],   # Reassigned for consistency with other Cacciani/Huang lines
+      "21CaCeBeCa.1157" : ["0-1-1-1-1-1-8-8-s-E'-285", None],   # Reassigned for consistency with other Cacciani/Huang lines
+         "22HuSuTo.264" : ["0-1-1-1-1-1-8-8-s-E'-285", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.1730" : ["0-1-1-1-1-1-8-8-s-E'-285", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.1731" : ["0-1-1-1-1-1-8-8-s-E'-285", None],   # Reassigned for consistency with other Cacciani/Huang lines
+         "23CaCeVo.161" : ["0-1-1-1-1-1-8-8-s-E'-285", None],   # Reassigned for consistency with other Cacciani/Huang lines
+         "23CaCeVo.160" : ["0-1-1-1-1-1-8-8-s-E'-285", None],   # Reassigned for consistency with other Cacciani/Huang lines
+         "23CaCeVo.945" : ["0-1-1-1-1-1-8-8-s-E'-285", None],   # Reassigned for consistency with other Cacciani/Huang lines
+         "23CaCeVo.946" : ["0-1-1-1-1-1-8-8-s-E'-285", None],   # Reassigned for consistency with other Cacciani/Huang lines
+         "22HuSuTo.263" : ["0-1-1-1-1-1-8-8-s-E'-285", None],   # Reassigned for consistency with other Cacciani/Huang lines
+       "21CaCeBeCa.234" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
+      "21CaCeBeCa.1371" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.1306" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.2029" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.1307" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.2030" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.2713" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.3294" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
+         "23CaCeVo.405" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.3295" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
+         "22HuSuTo.248" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
+         "22HuSuTo.249" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
+       "21CaCeBeCa.861" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
+     "22CaCeVaCaa.3290" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
+     "22CaCeVaCaa.5277" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
+         "22HuSuTo.247" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
 }
 
 badLines = pd.read_csv("BadLines.txt", delim_whitespace=True)
