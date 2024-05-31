@@ -58,7 +58,7 @@ def removeTransitions(row, transitionsToRemove, transitionsToCorrect, transition
         if lowerStateReassignment != None:
             newLowerStateLabels = lowerStateReassignment.split("-")
             for i in range(3 + numberOfQuantumNumbers, 3 + 2*numberOfQuantumNumbers):
-                row[columnLabels[i]] = newLowerStateLabels[i - 3]
+                row[columnLabels[i]] = newLowerStateLabels[i - (3 + numberOfQuantumNumbers)]
     if row["Source"] in badLines["Line"].tolist():
         matchingBadLines = badLines[badLines["Line"] == row["Source"]]
         badLine = matchingBadLines.tail(1).squeeze()
@@ -279,6 +279,7 @@ transitionsToReassign = {
     # "18ZoCoOvKy.331": ["5-0-1-0-1-0-5-4-a-A2\"-6204", None],
     # "18ZoCoOvKy.224": ["5-0-0-0-0-0-7-6-a-E'-8434", None], 
     # "18ZoCoOvKy.69":  ["5-0-0-0-0-0-7-6-a-E'-8434", None],
+    "22HuSuTo.1180" : [None, "0-0-0-0-0-0-4-2-a-E\"-2"], # Lower state appears to have been assigned wrong inversion number
     "22CaCeVaCa.1539" : ["0-1-0-2-0-2-1-0-s-A2'-13", None],     # Assignments made by Cacciani 
     "22CaCeVaCa.1060" : ["0-1-0-2-0-2-1-0-s-A2'-13", None],     # to a certain J-Symmetry block and
     "22CaCeVaCa.1364" : ["0-1-0-2-0-2-1-1-s-E\"-19", None],     # block number but disagree with
