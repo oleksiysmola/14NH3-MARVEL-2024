@@ -1,3 +1,6 @@
+A list of transitions whose block numbers are adjusted by the given value.
+Initial assignment of block number comes from matching the upper state energy
+to the closest energy in the states file from the same J-Gamma block.
 17BaPoYuTe.541 Nb' +1
 17BaPoYuTe.112 Nb' +1
 17BaPoYuTe.545 Nb' +2

@@ -109,7 +109,7 @@ transitionsWithStateFileComparison = transitions[transitionsColumnsComparison]
 transitionsWithStateFileComparison = transitionsWithStateFileComparison.sort_values(by=["J'", "Gamma'", "E'"])
 transitions = transitions[transitionsColumns]
 transitions = transitions.to_string(index=False, header=False)
-marvelFile = "86CoLeMarvel.txt"
+marvelFile = "86CoLeMarvelNew.txt"
 with open(marvelFile, "w+") as FileToWriteTo:
     FileToWriteTo.write(transitions)
     

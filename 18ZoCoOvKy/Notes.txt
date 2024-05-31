@@ -274,3 +274,10 @@ We change vibrational labels to that given in the states file.
 Invalidated as it falls between two levels confirmed through CD and have 
 corresponding empirical and refined levels in Table 2. No matches found for
 18ZoCoOvKy.23.
+
+18ZoCoOvKy.74 
+Invalidated as it has the exact same line position and assignment as 18ZoCoOvKy.73
+18ZoCoOvKy.227 
+Invalidated as it has the exact same line position and assignment as 18ZoCoOvKy.226
+Note that each line was given a different intensity even if line position and assignment
+were the same

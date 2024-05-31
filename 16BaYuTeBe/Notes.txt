@@ -1,0 +1,44 @@
+These two transitions are invalidated since no other upper states found
+from the same J-Gamma block. Both transitions belong to the J=16 A2' block. 
+16BaYuTeBe.1954
+16BaYuTeBe.627
+A list of transitions whose block numbers are adjusted by the given value or invalidated.
+Initial assignment of block number comes from matching the upper state energy
+to the closest energy in the states file from the same J-Gamma block.
+16BaYuTeBe.1518 Nb' +1
+16BaYuTeBe.1319 Nb' -1
+16BaYuTeBe.1934 Nb' -2 - Also exact same rovibrational assignment
+16BaYuTeBe.2036 Nb' -1 - Also exact same rovibrational assignment
+16BaYuTeBe.1535 Nb' -1
+16BaYuTeBe.1266 Nb' -1
+16BaYuTeBe.1641 Nb' +1
+16BaYuTeBe.44   Nb' -2
+16BaYuTeBe.142  Nb' -2
+16BaYuTeBe.1837 Nb' -1
+16BaYuTeBe.2048 Nb' -1
+16BaYuTeBe.2117 Nb' -1
+16BaYuTeBe.449  Nb' -1
+16BaYuTeBe.340  Nb' -1
+16BaYuTeBe.1860 Nb' +1
+16BaYuTeBe.1009 Nb' -1
+16BaYuTeBe.1904 Nb' -1
+16BaYuTeBe.1605 Nb' -1
+16BaYuTeBe.1747 Nb' -2
+16BaYuTeBe.2110 Nb' -2
+16BaYuTeBe.1755 Nb' -1
+16BaYuTeBe.2034 Nb' -1
+16BaYuTeBe.1790 Nb' -2
+16BaYuTeBe.2122 Nb' -2
+16BaYuTeBe.1785 Invalidated 1 transition
+16BaYuTeBe.1854 Nb' -3
+16BaYuTeBe.2151 Nb' -1
+16BaYuTeBe.1888 Nb' -1
+16BaYuTeBe.1858 Nb' -1
+16BaYuTeBe.98   Invalidated 1 transition
+16BaYuTeBe.81   Invalidated 1 transition
+16BaYuTeBe.1123 Nb' -1
+16BaYuTeBe.1500 Nb' -1
+16BaYuTeBe.1038 Nb' -1
+16BaYuTeBe.971  Nb' -1
+16BaYuTeBe.1204 Nb' +1
+ 16BaYuTeBe.968 Nb' +1
