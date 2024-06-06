@@ -242,6 +242,9 @@ transitionsToRemove = [
     "18ZoCoOvKy.227",
     # The above are transitions from 18ZoCoOvky which we cannot find a reasonable match for in the states file
     "22HuSuTo.679",
+    "22CaCeVaCa.6033",
+    "22CaCeVaCa.4877",
+    "22CaCeVaCa.2228",
 ]
 
 transitionsToCorrect = {
@@ -1023,6 +1026,50 @@ transitionsToReassign = {
      "22CaCeVaCaa.3290" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
      "22CaCeVaCaa.5277" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
          "22HuSuTo.247" : ["0-1-1-1-1-1-8-2-s-E'-324", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.2947" : ["0-1-1-1-1-1-9-7-a-A2'-176", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.1957" : ["0-1-1-1-1-1-9-7-a-A2'-176", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.2670" : ["0-1-1-1-1-1-9-7-a-A2'-176", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.1122" : ["0-1-1-1-1-1-9-7-a-A2'-176", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.1956" : ["0-1-1-1-1-1-9-7-a-A2'-176", None],   # Reassigned for consistency with other Cacciani/Huang lines
+         "22HuSuTo.402" : ["0-1-1-1-1-1-9-7-a-A2'-176", None],   # Reassigned for consistency with other Cacciani/Huang lines
+      "21CaCeBeCa.1319" : ["0-1-1-1-1-1-9-7-a-A2'-176", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.2870" : ["0-3-0-2-0-0-9-9-a-A2'-177", None],   # Reassigned for consistency with other Cacciani/Huang lines
+     "22CaCeVaCaa.2478" : ["0-3-0-2-0-0-9-9-a-A2'-177", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.3242" : ["0-3-0-2-0-0-9-9-a-A2'-177", None],   # Reassigned for consistency with other Cacciani/Huang lines
+         "22HuSuTo.401" : ["0-3-0-2-0-0-9-9-a-A2'-177", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.2871" : ["0-3-0-2-0-0-9-9-a-A2'-177", None],   # Reassigned for consistency with other Cacciani/Huang lines
+     "22CaCeVaCaa.4740" : ["0-3-0-2-0-0-9-9-a-A2'-177", None],   # Reassigned for consistency with other Cacciani/Huang lines
+       "21CaCeBeCa.736" : ["0-3-0-2-0-0-9-9-a-A2'-177", None],   # Reassigned for consistency with other Cacciani/Huang lines
+    "89UrTuRaGu_S2.311" : ["0-1-1-0-1-0-9-9-s-E\"-126", None],   # Reassigned block number to correct energy ordering
+       "14CeHoVeCa.235" : ["0-1-1-0-1-0-9-9-s-E\"-126", None],   # Reassigned block number to correct energy ordering
+      "22CaCeVaCa.5357" : ["0-1-1-0-1-0-9-9-s-E\"-126", None],   # Reassigned block number to correct energy ordering
+      "22CaCeVaCa.1588" : ["0-1-1-0-1-0-9-9-s-E\"-126", None],   # Reassigned block number to correct energy ordering
+      "22CaCeVaCa.3822" : ["0-1-1-0-1-0-9-9-s-E\"-126", None],   # Reassigned block number to correct energy ordering
+       "89UrTuRaGu.347" : ["0-1-1-0-1-0-9-9-s-E\"-126", None],   # Reassigned block number to correct energy ordering
+         "21CeCaCo.571" : ["0-1-1-0-1-0-9-9-s-E\"-126", None],   # Reassigned block number to correct energy ordering
+       "89UrTuRaGu.387" : ["0-1-1-0-1-0-9-9-s-E\"-126", None],   # Reassigned block number to correct energy ordering
+         "85UrMiRa.273" : ["0-1-1-0-1-0-9-9-s-E\"-126", None],   # Reassigned block number to correct energy ordering
+         "85UrMiRa.103" : ["1-1-0-0-0-0-9-7-s-E\"-127", None],   # Reassigned block number to correct energy ordering
+       "85AnFiFrIl.429" : ["1-1-0-0-0-0-9-7-s-E\"-127", None],   # Reassigned block number to correct energy ordering
+      "22CaCeVaCa.1138" : ["1-1-0-0-0-0-9-7-s-E\"-127", None],   # Reassigned block number to correct energy ordering
+      "22CaCeVaCa.3162" : ["1-1-0-0-0-0-9-7-s-E\"-127", None],   # Reassigned block number to correct energy ordering
+      "22CaCeVaCa.4926" : ["1-1-0-0-0-0-9-7-s-E\"-127", None],   # Reassigned block number to correct energy ordering
+        "89UrTuRaGu.48" : ["1-1-0-0-0-0-9-7-s-E\"-127", None],   # Reassigned block number to correct energy ordering
+       "89UrTuRaGu.135" : ["1-1-0-0-0-0-9-7-s-E\"-127", None],   # Reassigned block number to correct energy ordering
+      "22CaCeVaCa.3066" : ["1-1-0-0-0-0-9-7-s-E\"-127", None],   # Reassigned block number to correct energy ordering
+          "21CeCaCo.76" : ["1-1-0-0-0-0-9-7-s-E\"-127", None],   # Reassigned block number to correct energy ordering
+           "21CeCaCo.1" : ["1-1-0-0-0-0-9-7-s-E\"-127", None],   # Reassigned block number to correct energy ordering
+     "89UrTuRaGu_S2.93" : ["1-1-0-0-0-0-9-7-s-E\"-127", None],   # Reassigned block number to correct energy ordering
+        "14CeHoVeCa.36" : ["1-1-0-0-0-0-9-7-s-E\"-127", None],   # Reassigned block number to correct energy ordering
+        #  "22HuSuTo.287" : ["0-1-1-1-1-1-10-6-s-E'-282", None],   # Reassigned for consistency with other Cacciani/Huang lines
+       "21CaCeBeCa.715" : ["0-1-1-1-1-1-10-6-s-E'-382", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        #  "22HuSuTo.288" : ["0-1-1-1-1-1-10-6-s-E'-282", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.2008" : ["0-1-1-1-1-1-10-6-s-E'-382", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.2652" : ["0-1-1-1-1-1-10-6-s-E'-382", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.1095" : ["0-1-1-1-1-1-10-6-s-E'-382", None],   # Reassigned for consistency with other Cacciani/Huang lines
+      "21CaCeBeCa.1358" : ["0-1-1-1-1-1-10-6-s-E'-382", None],   # Reassigned for consistency with other Cacciani/Huang lines
+         "23CaCeVo.690" : ["0-1-1-1-1-1-10-6-s-E'-382", None],   # Reassigned for consistency with other Cacciani/Huang lines
+        "23CaCeVo.3190" : ["0-1-1-1-1-1-10-6-s-E'-382", None],   # Reassigned for consistency with other Cacciani/Huang lines
 }
 
 badLines = pd.read_csv("BadLines.txt", delim_whitespace=True)
