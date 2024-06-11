@@ -121,7 +121,7 @@ Invalidated for the time being.
  18ZoCoOvKy.32
  18ZoCoOvKy.33
 Two transitions each proposed two different assignments. Two close lying states in the states file to 
-match too as well so both scenarios are included. A third transition 18ZoCoOvKy.121 is assumed to 
+match to as well so both scenarios are included. A third transition 18ZoCoOvKy.121 is assumed to 
 only go to the highest of these two states and so therefore breaks the energy degeneracy.
 
 18ZoCoOvKy.140 seems to form a CD level with 18ZoCoOvKy.42 which is assigned to the a state
