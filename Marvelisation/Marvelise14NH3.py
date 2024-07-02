@@ -17,7 +17,13 @@ symmetryMap = {
     "E\"": "6"
 }
 
+inversionMap = {
+    "s": 0,
+    "a": 1,
+}
+
 marvelEnergies["Gamma"] = marvelEnergies["Gamma"].map(symmetryMap)
+marvelEnergies["inv"] = marvelEnergies["inv"].map(inversionMap)
 
 statesFileColumns = ["i", "E", "g", "J", "weight", "p", "Gamma", "Nb", "n1", "n2", "n3", "n4", "l3", "l4", "inversion", "J'", "K'", "pRot", "v1", "v2", "v3", "v4", "v5", "v6", "GammaVib", "Calc"]
 states = pd.read_csv("../14N-1H3__CoYuTe.states", delim_whitespace=True, names=statesFileColumns, dtype=str)
@@ -29,11 +35,11 @@ def generateTagColumn(dataFrame):
 marvelEnergies = generateTagColumn(marvelEnergies)
 states = generateTagColumn(states)
 
-columnsToConvertToInteger = ["J","n1", "n2", "n3", "n4"]
+columnsToConvertToInteger = ["J","n1", "n2", "n3", "n4", "inversion"]
 for column in columnsToConvertToInteger:
     states[column] = states[column].astype(int)
 
-states = pd.merge(states, marvelEnergies[["Tag", "Em", "Uncertainty"]], on="Tag", how="left")
+states = pd.merge(states, marvelEnergies.drop(["J", "Gamma", "Nb"], axis=1), on="Tag", how="left")
 
 columnsToConvertToFloat = ["Em", "E", "Calc", "weight", "Uncertainty"]
 for column in columnsToConvertToFloat:
@@ -46,9 +52,17 @@ def marvelise(row):
     deltaB = 0.002
     deltaOmega = 0.3
     calculatedEnergy = row["Calc"]
-    if row["Em"] >= 0:
+    if row["Em"] >= 0 and abs(row["E"] - row["Em"]) < 1:
         row["Marvel"] = "Ma"
-        marvelUncertainty = row["Uncertainty"] 
+        marvelUncertainty = row["Uncertainty"]
+        row["n1"] = row["nu1"]
+        row["n2"] = row["nu2"]
+        row["n3"] = row["nu3"]
+        row["n4"] = row["nu4"] 
+        row["l3"] = row["L3"]
+        row["l4"] = row["L4"]
+        row["inversion"] = row["inv"]
+        row["K'"] = row["K"]
         row["weight"] = f"{marvelUncertainty:.{6}f}"
         marvelEnergy = row["Em"] 
         row["E"] = f"{marvelEnergy:.{6}f}" 
@@ -63,6 +77,7 @@ def marvelise(row):
 print("\n")
 print("Beginning Marvelisation...")
 states = states.parallel_apply(lambda x:marvelise(x), result_type="expand", axis=1)
+states["inversion"] = states["inversion"].astype(int)
 print("\n")
 print("Marvelisation complete!")
 statesFileColumns = ["i", "E", "g", "J", "weight", "p", "Gamma", "Nb", "n1", "n2", "n3", "n4", "l3", "l4", "inversion", "J'", "K'", "pRot", "v1", "v2", "v3", "v4", "v5", "v6", "GammaVib", "Marvel", "Calc"]
@@ -72,7 +87,6 @@ columnWidth = 1
 def formatColumns(value):
     global columnWidth
     return f'{value: >{columnWidth}}'
-    
 def reformatColumns(dataFrame, columnReformattingOptions):
     global columnWidth 
     collectedReformattedColumns = []
