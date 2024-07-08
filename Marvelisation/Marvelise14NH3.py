@@ -6,7 +6,7 @@ pd.set_option('display.float_format', '{:.6f}'.format)
 
 marvelColumns = ["nu1", "nu2", "nu3", "nu4", "L3", "L4", "J", "K", "inv", "Gamma", "Nb", "Em", "Uncertainty", "Transitions"]
 
-marvelEnergies = pd.read_csv("14NH3-NewEnergies.txt", delim_whitespace=True, names=marvelColumns, dtype=str)
+marvelEnergies = pd.read_csv("14NH3-NewEnergies-MoreNbAssignments.txt", delim_whitespace=True, names=marvelColumns, dtype=str)
 
 symmetryMap = {
     "A1'": "1",
