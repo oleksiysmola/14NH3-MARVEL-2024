@@ -1,4 +1,4 @@
-nu1' nu2' nu3' L3' nu4' L4' J' K' GammaRot Gammatot Eobs Calc' obs–calc CD
+nu1' nu2' nu3' L3' nu4' L4' inv' J' K' GammaRot Gammatot Eobs' Calc' obs–calc CD
 4 0 0 0 0 0 s 2 1 E" E" 12681.2069 12680.5364 0.6705 –0.0030
 4 0 0 0 0 0 s 3 0 A2' A2' 12741.5406 12745.3641 –3.8235 0.0018
 4 0 0 0 0 0 s 4 1 E" E" 12812.1747 12814.5152 –2.3405 0.0002

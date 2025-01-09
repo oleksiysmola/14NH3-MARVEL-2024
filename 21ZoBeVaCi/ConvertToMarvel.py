@@ -2,29 +2,24 @@ import pandas as pd
 from pandarallel import pandarallel
 pandarallel.initialize(progress_bar=True)
 
-transitionsColumns = ["nu", "int", "J'", "K'", "Gamma'", "<-", "J\"", "K\"", "Gamma\"", "Calc'", "<-'", "Calc\"", "nuCalc", "v1'", "v2'", "v3'", "v4'", "v5'", "v6'", "<-''",
-                      "v1\"", "v2\"", "v3\"", "v4\"", "v5\"", "v6\"", "Int"]
 
-
-transitions = pd.read_csv("21ZoBeVaCi-AssignedTransitions.txt", delim_whitespace=True, names=transitionsColumns)
+transitions = pd.read_csv("21ZoBeVaCi-MatchedToLevels-2.txt", delim_whitespace=True)
 transitions = transitions[transitions["nu"] > 0]
 
 transitions = transitions.dropna()
+transitions["unc1"] = 0.04
+transitions["unc2"] = 0.04
 
 quantumNumbers = ["J'", "K'", "J\"", "K\"", "v1'", "v2'", "v3'", "v4'", "v5'", "v6'",
-                      "v1\"", "v2\"", "v3\"", "v4\"", "v5\"", "v6\""]
+                      "v1\"", "v2\"", "v3\"", "v4\"", "v5\"", "v6\"", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'"]
 
 for quantumNumber in quantumNumbers:
     transitions[quantumNumber] = transitions[quantumNumber].astype(int)
+
 print(transitions.head(20).to_string(index=False))
 print(len(transitions))
 
-empiricalUpperStates = pd.read_csv("21ZoBeVaCi-EmpiricialEnergies.txt")
-transitions["unc2"] = transitions["unc1"]
-transitions["L3'"] = abs(transitions["L3'"])
-transitions["L4'"] = abs(transitions["L4'"])
-transitions["L3\""] = abs(transitions["L3\""])
-transitions["L4\""] = abs(transitions["L4\""])
+print(transitions.to_string(index=False))
 # symmetryToNumbersMap = {
 #     "A1'":1,
 #     "A2'":2,
@@ -42,9 +37,9 @@ transitions["L4\""] = abs(transitions["L4\""])
 
 statesFileColumns = ["i", "E", "g", "J", "weight", "p", "Gamma", "Nb", "nu1", "nu2", "nu3", "nu4", "L3", "L4", "inv", "J'", "K'", "pRot", "v1", "v2", "v3", "v4", "v5", "v6", "GammaVib", "Calc"]
 states = pd.read_csv("../14N-1H3__CoYuTe.states", delim_whitespace=True, names=statesFileColumns)
-states = states[states["E"] < 20000]
+states = states[states["E"] < 14000]
 states = states[states["g"] > 0]
-states = states[states["J"] <= 8] 
+states = states[states["J"] <= 9] 
 
 selectionRules = {
     "A1'": "A1\"", # Technically the nuclear spin statistical weights of the A1 states are zero
@@ -78,11 +73,23 @@ def findBlockNumber(row, states, selectionRules):
         "s": 0,
         "a": 1
     }
-    matchingLowerStates = matchingLowerStates[matchingLowerStates["inv"] == inversionMapping[row["inv\""]]]
+    mapfromInversionNumbers = {
+        0: "s",
+        1: "a"
+    }
+    # matchingLowerStates = matchingLowerStates[matchingLowerStates["inv"] == inversionMapping[row["inv\""]]]
     # matchingLowerStates["Tag"] = matchingLowerStates["J"].astype(str) + "-" + matchingLowerStates["K'"].astype(str) + "-" + matchingLowerStates["inv"].astype(str) + "-" + matchingLowerStates["GammaVib"].astype(str) + "-" + matchingLowerStates["pRot"].astype(str) + "-" + matchingLowerStates["Gamma"].astype(str)
     # matchingLowerStates = matchingLowerStates[matchingLowerStates["Tag"] == row["Tag\""]]
-    matchingLowerState = matchingLowerStates.sort_values(by="E").head(1).squeeze()
+    matchingLowerStates["Difference"] = abs(matchingLowerStates["Calc"] - row["Calc\""])
+    matchingLowerState = matchingLowerStates.sort_values(by="Difference").head(1).squeeze()
     row["E\""] = matchingLowerState["E"]
+    row["nu1\""] = matchingLowerState["nu1"]
+    row["nu2\""] = matchingLowerState["nu2"]
+    row["nu3\""] = matchingLowerState["nu3"]
+    row["nu4\""] = matchingLowerState["nu4"]
+    row["L3\""] = matchingLowerState["L3"]
+    row["L4\""] = matchingLowerState["L4"]
+    row["inv\""] = mapfromInversionNumbers[matchingLowerState["inv"]]
     row["Nb\""] = matchingLowerState["Nb"]
     row["Gamma\""] = matchingLowerState["Gamma"]
     row["E'"] = row["E\""] + row["nu"]
@@ -110,11 +117,11 @@ def findBlockNumber(row, states, selectionRules):
     # matchingUpperStates = matchingUpperStates[matchingUpperStates["Gamma"] == row["Gamma'"]]
     # matchingUpperStates = matchingUpperStates[matchingUpperStates["pRot"] == row["GammaRot'"]]
     # matchingUpperStates = matchingUpperStates[matchingUpperStates["GammaVib"] == row["GammaVib'"]]
-    matchingUpperStates["Difference"] = abs(row["E'"] - matchingUpperStates["E"])
+    matchingUpperStates["Difference"] = abs(row["Calc'"] - matchingUpperStates["E"])
     matchingUpperStates = matchingUpperStates.sort_values(by="Difference")
     matchingUpperState = matchingUpperStates.head(1).squeeze()
     row["Nb'"] = matchingUpperState["Nb"]
-    row["Calc'"] = matchingUpperState["E"]
+    # row["Calc'"] = matchingUpperState["E"]
     # row["nu1'"] = matchingUpperState["nu1"]
     # row["nu2'"] = matchingUpperState["nu2"]
     # row["nu3'"] = matchingUpperState["nu3"]
@@ -124,13 +131,14 @@ def findBlockNumber(row, states, selectionRules):
     # row["inv'"] = matchingUpperState["inv"]
     row["Gamma'"] = matchingUpperState["Gamma"]
     row["Diff"] = matchingUpperState["Difference"]
-    if row["nu"] >= 15669.8166:
-        row["ExpRatio"] = row["int"]/0.422
-        row["CalcRatio"] = row["Int"]/(1.080000e-23)
-    else:
-        row["ExpRatio"] = row["int"]/0.05900
-        row["CalcRatio"] = row["Int"]/(8.790000e-25)
-    row["DiffRatio"] = row["ExpRatio"] - row["CalcRatio"]/row["ExpRatio"]
+    row["CoYuTeEnergy"] = matchingUpperState["E"]
+    # if row["nu"] >= 15669.8166:
+    #     row["ExpRatio"] = row["int"]/0.422
+    #     row["CalcRatio"] = row["Int"]/(1.080000e-23)
+    # else:
+    #     row["ExpRatio"] = row["int"]/0.05900
+    #     row["CalcRatio"] = row["Int"]/(8.790000e-25)
+    # row["DiffRatio"] = row["ExpRatio"] - row["CalcRatio"]/row["ExpRatio"]
     return row
 
 transitions = transitions.parallel_apply(lambda x:findBlockNumber(x, states, selectionRules), axis=1, result_type="expand")
@@ -151,25 +159,28 @@ inversionMapping = {
 }
 # transitions["inv'"] = transitions["inv'"].map(inversionMapping)
 # transitions["inv\""] = transitions["inv\""].map(inversionMapping)
-sourceColumn = [f"18ZoCoOvKy.{i+1}" for i in range(len(transitions))]
+sourceColumn = [f"21ZoBeVaCi.{i+1}" for i in range(len(transitions))] 
 transitions["Source"] = sourceColumn
 transitionsColumns = ["nu", "unc1", "unc2", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "inv'", "Gamma'", "Nb'",
                       "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "inv\"", "Gamma\"", "Nb\"", "Source"]
-
-transitionsColumnsComparison = ["nu", "unc1", "unc2", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "inv'", "Gamma'", "Nb'",
-                      "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "inv\"", "Gamma\"", "Nb\"", "Source", "E'", "Calc'", "Diff", "int", "Int", 
-                      "ExpRatio", "CalcRatio", "DiffRatio"]
-transitionsWithStateFileComparison = transitions[transitionsColumnsComparison]
-transitionsWithStateFileComparison = transitionsWithStateFileComparison.sort_values(by=["J'", "Gamma'", "E'"])
-intensityComparison = transitionsWithStateFileComparison[["nu", "int", "Int"]].sort_values(by="int")
-print(intensityComparison[intensityComparison["nu"] > 15669.8166].tail(50).to_string(index=False))
+transitionsColumnsForComparison = ["nu", "unc1", "unc2", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "inv'", "Gamma'", "Nb'",
+                      "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "inv\"", "Gamma\"", "Nb\"", "Source", "Eobs'","Calc'", "CoYuTeEnergy"]
+# transitionsColumnsComparison = ["nu", "unc1", "unc2", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "inv'", "Gamma'", "Nb'",
+#                       "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "inv\"", "Gamma\"", "Nb\"", "Source", "E'", "Calc'", "Diff", "int", "Int", 
+#                       "ExpRatio", "CalcRatio", "DiffRatio"]
+# transitionsWithStateFileComparison = transitions[transitionsColumnsComparison]
+# transitionsWithStateFileComparison = transitionsWithStateFileComparison.sort_values(by=["J'", "Gamma'", "E'"])
+# intensityComparison = transitionsWithStateFileComparison[["nu", "int", "Int"]].sort_values(by="int")
+# print(intensityComparison[intensityComparison["nu"] > 15669.8166].tail(50).to_string(index=False))
+transitionsForComparison = transitions[transitionsColumnsForComparison]
 transitions = transitions[transitionsColumns]
 transitions = transitions.to_string(index=False, header=False)
-marvelFile = "18ZoCoOvKyMarvel.txt"
+marvelFile = "21ZoBeVaCi-MARVEL.txt"
 with open(marvelFile, "w+") as FileToWriteTo:
     FileToWriteTo.write(transitions)
-    
-transitionsWithStateFileComparison = transitionsWithStateFileComparison.to_string(index=False, header=False)
-comparisonFile = "18ZoCoOvKyAgainstStatesFile.txt"
+transitionsForComparison["Obs-Calc"] = transitionsForComparison["Eobs'"] - transitionsForComparison["Calc'"]
+transitionsForComparison["Obs-Calc-CoYuTe"] = transitionsForComparison["Eobs'"] - transitionsForComparison["CoYuTeEnergy"]
+transitionsForComparison = transitionsForComparison.to_string(index=False, header=False)
+comparisonFile = "21ZoBeVaCiAgainstStatesFile.txt"
 with open(comparisonFile, "w+") as fileToWriteTo:
-    fileToWriteTo.write(transitionsWithStateFileComparison)
+    fileToWriteTo.write(transitionsForComparison)

@@ -1,0 +1,4 @@
+        nu          int  J'  K' Gamma' <-  J"  K" Gamma"      Calc' <-'    Calc"     nuCalc  v1'  v2'  v3'  v4'  v5'  v6' <-''  v1"  v2"  v3"  v4"  v5"  v6"          Int  nu1'  nu2'  nu3'  nu4'  L3'  L4' inv'      Eobs'
+12601.2731 1.910000e-24   5   5    A2" <-   6   6    A2' 12886.1490  <- 283.5690 12602.5800    0    0    3    0    2    0   <-    0    0    0    0    0    0 2.610000e-24   NaN   NaN   NaN   NaN  NaN  NaN  NaN        NaN
+12718.7536 5.570000e-25   5   5    A2" <-   4   3    A2' 12886.1490  <- 166.0892 12720.0598    0    0    3    0    2    0   <-    0    0    0    0    0    1 3.940000e-25   NaN   NaN   NaN   NaN  NaN  NaN  NaN        NaN
+12747.8453 5.020000e-25   5   4    A2' <-   4   3    A2" 12915.9505  <- 165.3307 12750.6198    0    1    1    0    0   12   <-    0    0    0    0    0    0 1.270000e-24   NaN   NaN   NaN   NaN  NaN  NaN  NaN        NaN

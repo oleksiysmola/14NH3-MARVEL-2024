@@ -34,6 +34,7 @@ transitionsFiles = [
     "../18ZoCoOvKy/18ZoCoOvKyMarvel.txt",
     "../17BaPoYuTe/17BaPoYuTe-MARVEL.txt",
     "../16BaYuTeBe/16BaYuTeBe-MARVEL.txt",
+    "../21ZoBeVaCi/21ZoBeVaCi-MARVEL.txt"
 ]
 
 for transitionFile in transitionsFiles:
@@ -241,6 +242,12 @@ transitionsToRemove = [
     "18ZoCoOvKy.74",
     "18ZoCoOvKy.227",
     # The above are transitions from 18ZoCoOvky which we cannot find a reasonable match for in the states file
+    "21ZoBeVaCi.17",
+    "21ZoBeVaCi.12",
+    "21ZoBeVaCi.252",
+    "21ZoBeVaCi.256",
+    "21ZoBeVaCi.103",
+    "21ZoBeVaCi.233",
     "22HuSuTo.679",
     "22CaCeVaCa.6033",
     "22CaCeVaCa.4877",
@@ -283,6 +290,12 @@ transitionsToReassign = {
     # "18ZoCoOvKy.331": ["5-0-1-0-1-0-5-4-a-A2\"-6204", None],
     # "18ZoCoOvKy.224": ["5-0-0-0-0-0-7-6-a-E'-8434", None], 
     # "18ZoCoOvKy.69":  ["5-0-0-0-0-0-7-6-a-E'-8434", None],
+    "21ZoBeVaCi.36": ["2-1-2-0-2-0-3-1-a-A2'-922", None],
+    "21ZoBeVaCi.67": ["2-1-2-0-2-0-3-1-a-A2'-922", None],
+    "21ZoBeVaCi.190": ["2-1-2-0-2-0-3-1-a-A2'-922", None],
+    "21ZoBeVaCi.96": ["0-0-4-0-2-0-4-4-s-A2'-1092", None],
+    "21ZoBeVaCi.139": ["0-0-4-0-2-0-4-4-s-A2'-1092", None],
+    "21ZoBeVaCi.238": ["0-0-4-0-2-0-4-4-s-A2'-1092", None],
     "22HuSuTo.1180" : [None, "0-0-0-0-0-0-4-2-a-E\"-2"], # Lower state appears to have been assigned wrong inversion number
     "22HuSuTo.692"  : [None, "0-0-0-0-0-0-9-5-a-E'-3"], # Lower state appears to have been assigned wrong inversion number
     "22HuSuTo.239"  : ["0-1-1-1-1-1-1-1-s-E\"-272", None],

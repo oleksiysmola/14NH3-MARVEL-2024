@@ -1,0 +1,11 @@
+Three transitions with no empirical level matching them - try to find match in states file.
+
+12747.8453 to be invalidated? Currently reassigned, based on closest matching level from lower state + transition
+
+Do not MARVELise?
+21ZoBeVaCi.31 
+21ZoBeVaCi.96
+21ZoBeVaCi.97
+21ZoBeVaCi.139
+21ZoBeVaCi.238
+21ZoBeVaCi.239
