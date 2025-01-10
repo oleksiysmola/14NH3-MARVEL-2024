@@ -201,8 +201,6 @@ transitionsToRemove = [
     "19SvRaVo.35",
     "19SvRaVo.24",
     "19SvRaVo.11",
-    "16BaYuTeBe.1954",
-    "16BaYuTeBe.627",
     "16BaYuTeBe.1785",
     "16BaYuTeBe.98",
     "16BaYuTeBe.81",

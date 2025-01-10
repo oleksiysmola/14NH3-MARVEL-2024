@@ -22,7 +22,7 @@ statesFileColumns = ["i", "E", "g", "J", "weight", "p", "Gamma", "Nb", "nu1", "n
 states = pd.read_csv("../14N-1H3__CoYuTe.states", delim_whitespace=True, names=statesFileColumns)
 states = states[states["E"] < 12000]
 states = states[states["g"] > 0]
-states = states[states["J"] <= 15] 
+states = states[states["J"] <= 16] 
 def findMatchingStates(row, states):
     matchingLowerStates = states[states["J"] == row["J\""]]
     matchingLowerStates = matchingLowerStates[matchingLowerStates["nu1"] == 0]
@@ -94,18 +94,18 @@ transitions["i\""] = transitions["i\""].map(inversionMap)
 transitions["Source"] = [f"16BaYuTeBe.{i + 1}" for i in range(len(transitions))]
 print(len(transitions))
 transitions = transitions.sort_values(by="E'")
-transitions = transitions.groupby(["J'", "Gtot'"])
-def assignBlockNumbers(dataFrame):
-    blockNumberAssignments = [-1]
-    if len(dataFrame) >= 2:
-        for i in range(1, len(dataFrame)):
-            if dataFrame.iloc[i]["E'"] - dataFrame.iloc[i-1]["E'"] < 0.05:
-                blockNumberAssignments += [blockNumberAssignments[i - 1]]
-            else:
-                blockNumberAssignments += [blockNumberAssignments[i - 1] - 1]
-    dataFrame["Nb'"] = blockNumberAssignments
-    return dataFrame
-transitions = transitions.parallel_apply(lambda x:assignBlockNumbers(x))
+# transitions = transitions.groupby(["J'", "Gtot'"])
+# def assignBlockNumbers(dataFrame):
+#     blockNumberAssignments = [-1]
+#     if len(dataFrame) >= 2:
+#         for i in range(1, len(dataFrame)):
+#             if dataFrame.iloc[i]["E'"] - dataFrame.iloc[i-1]["E'"] < 0.05:
+#                 blockNumberAssignments += [blockNumberAssignments[i - 1]]
+#             else:
+#                 blockNumberAssignments += [blockNumberAssignments[i - 1] - 1]
+#     dataFrame["Nb'"] = blockNumberAssignments
+#     return dataFrame
+# transitions = transitions.parallel_apply(lambda x:assignBlockNumbers(x))
 print(transitions.head(20).to_string())
 transitionsToMarvel = transitions[["nu", "unc1", "unc2", "nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "i'", "Gtot'", "Nb'",
                       "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "i\"", "Gtot\"", "Nb\"", "Source"]]#[transitions["Method"] == "CD"]
