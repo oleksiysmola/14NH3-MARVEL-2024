@@ -64,7 +64,7 @@ def findBlockNumber(row, states):
     row["Nb\""] = matchingLowerState["Nb"]
     row["E'"] = row["E\""] + row["nu"]
     matchingUpperStates = states[states["J"] == row["J'"]]
-    matchingUpperStates = matchingUpperStates[matchingUpperStates["K'"] == row["K'"]]
+    # matchingUpperStates = matchingUpperStates[matchingUpperStates["K'"] == row["K'"]]
     matchingUpperStates = matchingUpperStates[matchingUpperStates["Gamma"] == row["Gamma'"]]
     # matchingUpperStates = matchingUpperStates[matchingUpperStates["pRot"] == row["GammaRot'"]]
     # matchingUpperStates = matchingUpperStates[matchingUpperStates["GammaVib"] == row["GammaVib'"]]
@@ -109,7 +109,7 @@ transitionsWithStateFileComparison = transitions[transitionsColumnsComparison]
 transitionsWithStateFileComparison = transitionsWithStateFileComparison.sort_values(by=["J'", "Gamma'", "E'"])
 transitions = transitions[transitionsColumns]
 transitions = transitions.to_string(index=False, header=False)
-marvelFile = "86CoLeMarvelNew.txt"
+marvelFile = "86CoLeMarvel-MatchedToStatesFile.txt"
 with open(marvelFile, "w+") as FileToWriteTo:
     FileToWriteTo.write(transitions)
     

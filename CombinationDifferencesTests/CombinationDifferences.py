@@ -30,7 +30,7 @@ transitionsFiles = [
     "../23YaDeLa/23YaDeLa.txt",
     "../19SvRaVo/19SvRaVoMarvel.txt",
     "../24ZhAgSeSh/24ZhAgSeSh.txt",
-    # "../86CoLe/86CoLeMarvel.txt",
+    "../86CoLe/86CoLe-MARVEL.txt",
     "../18ZoCoOvKy/18ZoCoOvKyMarvel.txt",
     "../17BaPoYuTe/17BaPoYuTe-MARVEL.txt",
     "../16BaYuTeBe/16BaYuTeBe-MARVEL.txt",
