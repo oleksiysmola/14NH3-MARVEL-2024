@@ -34,7 +34,8 @@ transitionsFiles = [
     "../18ZoCoOvKy/18ZoCoOvKyMarvel.txt",
     "../17BaPoYuTe/17BaPoYuTe-MARVEL.txt",
     "../16BaYuTeBe/16BaYuTeBe-MARVEL.txt",
-    "../21ZoBeVaCi/21ZoBeVaCi-MARVEL.txt"
+    "../21ZoBeVaCi/21ZoBeVaCi-MARVEL.txt",
+    "../18MaMaMaPa/18MaMaMaPa-MARVEL.txt"
 ]
 
 for transitionFile in transitionsFiles:
