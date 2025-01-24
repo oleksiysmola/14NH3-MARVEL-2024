@@ -240,6 +240,7 @@ transitionsToRemove = [
     "18ZoCoOvKy.23",
     "18ZoCoOvKy.74",
     "18ZoCoOvKy.227",
+    "18ZoCoOvKy.181",
     # The above are transitions from 18ZoCoOvky which we cannot find a reasonable match for in the states file
     "18ZoCoOvKy.121",
     "18ZoCoOvKy.33",
@@ -256,7 +257,8 @@ transitionsToRemove = [
     "22CaCeVaCa.4877",
     "22CaCeVaCa.2228",
     "86CoLe.53",
-    "86CoLe.87"
+    "86CoLe.87",
+    "86CoLe.214",
 ]
 
 transitionsToCorrect = {
@@ -302,6 +304,11 @@ transitionsToReassign = {
     "21ZoBeVaCi.139": ["0-0-4-0-2-0-4-4-s-A2'-1092", None],
     "21ZoBeVaCi.238": ["0-0-4-0-2-0-4-4-s-A2'-1092", None],
     "86CoLe.56": ["4-0-1-0-1-0-2-1-a-E'-2888", None],
+    "86CoLe.79": ["4-0-1-0-1-0-3-0-a-E\"-4042", None],
+    "86CoLe.69":  ["4-0-1-0-1-0-4-1-s-A2\"-2637", None],
+    "86CoLe.196": ["4-0-1-0-1-0-4-1-s-A2\"-2637", None],
+    "86CoLe.68": ["5-0-0-0-0-0-4-0-a-A2\"-2641", None],
+    "86CoLe.195": ["5-0-0-0-0-0-4-0-a-A2\"-2641", None],
     # "86CoLe.87": ["4-0-1-0-1-0-2-1-a-E'-2888", None],
     "22HuSuTo.1180" : [None, "0-0-0-0-0-0-4-2-a-E\"-2"], # Lower state appears to have been assigned wrong inversion number
     "22HuSuTo.692"  : [None, "0-0-0-0-0-0-9-5-a-E'-3"], # Lower state appears to have been assigned wrong inversion number
