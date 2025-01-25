@@ -1107,113 +1107,46 @@ transitionsToReassign = {
 
 badLines = pd.read_csv("BadLines.txt", delim_whitespace=True)
 
-allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, transitionsToRemove, transitionsToCorrect, transitionsToReassign, badLines), axis=1, result_type="expand")
+reassignedTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, transitionsToRemove, transitionsToCorrect, transitionsToReassign, badLines), axis=1, result_type="expand")
 
-# Filtering
-Jupper = 6
-transitions = allTransitions[allTransitions["nu"] > 0]
-# transitions = transitions[transitions["J'"] == Jupper]
-print(transitions.head(20).to_string(index=False))
-
-def assignStateTags(row):
-    row["Tag'"] = str(row["J'"]) + "-" + str(row["Gamma'"]) + "-" + str(row["Nb'"])
-    row["Tag\""] = str(row["J\""]) + "-" + str(row["Gamma\""]) + "-" + str(row["Nb\""])
+def markReassignedTransitions(row):
+    row["Reassigned"] = False
+    if row["Source"] in transitionsToReassign.keys():
+        row["Reassigned"] = True
     return row
 
-transitions = transitions.parallel_apply(lambda x:assignStateTags(x), result_type="expand", axis=1)
-transitions = transitions.sort_values(by=["J'", "Gamma'", "Nb'"])
+reassignedTransitions = reassignedTransitions.parallel_apply(lambda x:markReassignedTransitions(x), result_type="expand", axis=1)
+originalAssignments = allTransitions.parallel_apply(lambda x:markReassignedTransitions(x), result_type="expand", axis=1)
+# reassignedTransitions = reassignedTransitions[reassignedTransitions["Reassigned"]][["nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "inv'", "Gamma'", "Nb'",
+#                       "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "inv\"", "Gamma\"", "Nb\"", "Source"]]
+originalAssignments = originalAssignments[originalAssignments["Reassigned"]]
+reassignedTransitions = reassignedTransitions[["nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "inv'", "Gamma'", "Nb'", "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "inv\"", "Gamma\"", "Nb\"", "Source"]]
 
-def computeUpperState(row, marvelEnergies):
-    matchingEnergyLevels = marvelEnergies[marvelEnergies["Tag"] == row["Tag\""]]
-    if len(matchingEnergyLevels) == 1:
-        row["E\""] = matchingEnergyLevels.squeeze()["E"]
-        row["E'"] = row["E\""] + row["nu"]
-    else:
-        row["E\""] = -10000
-    return row
+transitions = pd.merge(originalAssignments, reassignedTransitions, on="Source", how="left")
 
-transitions = transitions.parallel_apply(lambda x:computeUpperState(x, marvelEnergies), result_type="expand", axis=1)
-transitions = transitions[transitions["E\""] >= 0]
+transitions = transitions.drop("Reassigned", axis=1)
 
-transitionsGroupedByUpperState = transitions.groupby(["Tag'"])
-def applyCombinationDifferences(transitionsToUpperState, threshold=0.1):
-    transitionsToUpperState["Average E'"] = transitionsToUpperState["E'"].mean()
-    transitionsToUpperState["Problem"] = abs(transitionsToUpperState["E'"] - transitionsToUpperState["Average E'"]) > threshold
-    # If a problematic transition exists we mark all transitions to this upper state as those we wish to return later
-    transitionsToUpperState["Return"] = False
-    transitionsToUpperState["Return"] = transitionsToUpperState["Problem"].any()
-    return transitionsToUpperState
+def checkIfExperimentalAssignmentsHaveChanged(row):
+    row["Changed"] = False
+    quantumNumbers = ["nu1'", "nu2'", "nu3'", "nu4'", "L3'", "L4'", "J'", "K'", "inv'", "Gamma'", "nu1\"", "nu2\"", "nu3\"", "nu4\"", "L3\"", "L4\"", "J\"", "K\"", "inv\"", "Gamma\""]
+    for quantumNumber in quantumNumbers:
+        if str(row[quantumNumber + "_x"]) != str(row[quantumNumber + "_y"]):
+            print(row[quantumNumber + "_x"], row[quantumNumber + "_y"])
+            row["Changed"] = True
+    return row 
 
-# Tolerance for the combination difference test - adjust accordingly
-threshold = 0.05 # cm-1
-transitions = transitionsGroupedByUpperState.parallel_apply(lambda x:applyCombinationDifferences(x, threshold))
-returnedTransitions = transitions[transitions["Return"]]
+transitions = transitions.parallel_apply(lambda x:checkIfExperimentalAssignmentsHaveChanged(x), result_type="expand", axis=1)
 
-print("\n Returned combination differences:")
-print(returnedTransitions[["nu", "unc1", "Tag'", "Tag\"", "Source", "Average E'", "E'", "E\"", "Problem"]].to_string(index=False))
-
-transitionsByUpperStateEnergy = transitions.sort_values(by=["E'"])
-targetUpperState = 7075.641107
-transitionsByUpperStateEnergy = transitionsByUpperStateEnergy[transitionsByUpperStateEnergy["E'"] > targetUpperState - 1]
-transitionsByUpperStateEnergy = transitionsByUpperStateEnergy[targetUpperState + 1 > transitionsByUpperStateEnergy["E'"]]
-print(f"\n Returned upper state energies centred on {targetUpperState}: ")
-print(transitionsByUpperStateEnergy[["nu", "unc1", "Tag'", "Tag\"", "Source", "Average E'", "E'", "E\"", "Problem"]].to_string(index=False))
-
-# For checking if transitions obey symmetry selection rules
-runSelectionRulesCheck = False
-if runSelectionRulesCheck:
-    selectionRules = {
-        "A1'": "A1\"", # Technically the nuclear spin statistical weights of the A1 states are zero
-        "A1\"": "A1'",
-        "A2'": "A2\"",
-        "A2\"": "A2'",
-        "E'": "E\"",
-        "E\"": "E'",
-    }
-
-    def selectionRulesCheck(row, selectionRules):
-        row["SR Broken"] = False 
-        if "MAGIC" not in row["Source"]:
-            if row["Gamma\""] != selectionRules[row["Gamma'"]]:
-                row["SR Broken"] = True
-        return row
-    
-    transitions = transitions.parallel_apply(lambda x:selectionRulesCheck(x, selectionRules), axis=1, result_type="expand")
-    transitionsThatBreakSelectionRules = transitions[transitions["SR Broken"]]
-    print("\n Printing transitions which violate selection rules: ")
-    print(transitionsThatBreakSelectionRules[["nu", "unc1", "Tag'", "Tag\"", "Source", "Average E'", "E'", "E\"", "Problem"]].to_string(index=False))
-
-# For when matching to states file is needed
-readFromStatesFile = False
-if readFromStatesFile:
-    statesFileColumns = ["i", "E", "g", "J", "weight", "p", "Gamma", "Nb", "n1", "n2", "n3", "n4", "l3", "l4", "inversion", "J'", "K'", "pRot", "v1", "v2", "v3", "v4", "v5", "v6", "GammaVib", "Calc"]
-    states = pd.read_csv("../14N-1H3__CoYuTe.states", delim_whitespace=True, names=statesFileColumns)
-    states = states[states["E"] < 7000]
-    states = states[states["g"] > 0]
-    states = states[states["J"] == Jupper]
-    states = states[states["E"] > 6500]
-    print(states.to_string(index=False))
-
-    statesList = [
-        "21CaCeBeCa.1673",
-        "21CaCeBeCa.1674"
-    ]
-
-    def findMatchingStates(row, states):
-        matchingStates = states[states["J"] == row["J'"]]
-        matchingStates = matchingStates[matchingStates["Gamma"] == row["Gamma'"]]
-        matchingStates = matchingStates[matchingStates["Nb"] == row["Nb'"]]
-        row["CoYuTe E'"] = matchingStates.squeeze()["E"]
-        return row
-    
-    transitions = transitions.parallel_apply(lambda x:findMatchingStates(x, states), axis=1, result_type="expand")
-    statesFromList = transitions[transitions["Source"].isin(statesList)]
-    print("Selected states with CoYuTe upper state energy:")
-    print(statesFromList[["nu", "unc1", "Tag'", "Tag\"", "Source", "Average E'", "E'", "CoYuTe E'", "E\"", "Problem"]].to_string(index=False))
-
-
-allTransitions = allTransitions.sort_values(by=["nu"])
-allTransitions = allTransitions.to_string(index=False, header=False)
-marvelFile = "../Marvel-14NH3-Main.txt"
+transitionOrder = {}
+n = 1
+for transition in transitionsToReassign.keys():
+    transitionOrder[transition] = n
+    n += 1
+# transitions = transitions.sort_values(by=["nu"])
+transitions["order"] = transitions["Source"].map(transitionOrder)
+transitions = transitions.sort_values(by=["order"])
+transitions = transitions.drop("order", axis=1)
+transitions = transitions.to_string(index=False)
+marvelFile = "Reassignments.txt"
 with open(marvelFile, "w+") as FileToWriteTo:
-    FileToWriteTo.write(allTransitions)
+    FileToWriteTo.write(transitions)
