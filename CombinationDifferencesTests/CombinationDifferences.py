@@ -309,6 +309,12 @@ transitionsToReassign = {
     "86CoLe.196": ["4-0-1-0-1-0-4-1-s-A2\"-2637", None],
     "86CoLe.68": ["5-0-0-0-0-0-4-0-a-A2\"-2641", None],
     "86CoLe.195": ["5-0-0-0-0-0-4-0-a-A2\"-2641", None],
+    "16BaYuTeBe.1462": ["1-2-0-2-0-2-4-2-s-E'-490", None],
+    "16BaYuTeBe.1066": ["2-0-0-1-0-1-8-2-s-A2'-413", None],
+    # "86CoLe.255": ["5-0-0-0-0-0-5-0-s-A2'-3223", None],
+    # "86CoLe.263": ["1-4-1-4-1-3-5-1-a-A2'-3223", None],
+    "86CoLe.301": ["0-1-1-7-1-5-6-3-s-E\"-7434", None],
+    "86CoLe.132": ["1-4-1-3-1-3-5-1-a-A2'-3223", None],
     # "86CoLe.87": ["4-0-1-0-1-0-2-1-a-E'-2888", None],
     "22HuSuTo.1180" : [None, "0-0-0-0-0-0-4-2-a-E\"-2"], # Lower state appears to have been assigned wrong inversion number
     "22HuSuTo.692"  : [None, "0-0-0-0-0-0-9-5-a-E'-3"], # Lower state appears to have been assigned wrong inversion number
@@ -1106,7 +1112,7 @@ allTransitions = allTransitions.parallel_apply(lambda x:removeTransitions(x, tra
 # Filtering
 Jupper = 6
 transitions = allTransitions[allTransitions["nu"] > 0]
-transitions = transitions[transitions["J'"] == Jupper]
+# transitions = transitions[transitions["J'"] == Jupper]
 print(transitions.head(20).to_string(index=False))
 
 def assignStateTags(row):
