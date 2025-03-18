@@ -318,9 +318,9 @@ transitionsToReassign = {
     # "86CoLe.87": ["4-0-1-0-1-0-2-1-a-E'-2888", None],
     "22HuSuTo.1180" : [None, "0-0-0-0-0-0-4-2-a-E\"-2"], # Lower state appears to have been assigned wrong inversion number
     "22HuSuTo.692"  : [None, "0-0-0-0-0-0-9-5-a-E'-3"], # Lower state appears to have been assigned wrong inversion number
-    "22HuSuTo.239"  : ["0-1-1-1-1-1-7-1-s-E\"-272", None],
-    "22HuSuTo.238"  : ["0-1-1-1-1-1-7-1-s-E\"-272", None],
-    "22HuSuTo.237"  : ["0-1-1-1-1-1-7-1-s-E\"-272", None],
+    "22HuSuTo.239"  : ["0-1-1-1-1-1-7-5-s-E\"-272", None], # Changed to agree with Cacciani papers
+    "22HuSuTo.238"  : ["0-1-1-1-1-1-7-5-s-E\"-272", None], # Changed to agree with Cacciani papers
+    "22HuSuTo.237"  : ["0-1-1-1-1-1-7-5-s-E\"-272", None], # Changed to agree with Cacciani papers
     "22CaCeVaCa.1539" : ["0-1-0-2-0-2-1-0-s-A2'-13", None],     # Assignments made by Cacciani 
     "22CaCeVaCa.1060" : ["0-1-0-2-0-2-1-0-s-A2'-13", None],     # to a certain J-Symmetry block and
     "22CaCeVaCa.1364" : ["0-1-0-2-0-2-1-1-s-E\"-19", None],     # block number but disagree with
