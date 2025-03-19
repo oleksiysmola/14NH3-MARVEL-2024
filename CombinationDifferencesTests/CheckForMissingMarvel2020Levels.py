@@ -44,6 +44,7 @@ fontsize=30
 # plt.plot(marvelEnergiesNew["J"], marvelEnergiesNew["E"], "b.", label="This work")
 # plt.plot(marvelEnergiesOld["J"], marvelEnergiesOld["E"], "r.", label="20FuCoTe")
 # plt.xlim(0, 31)
+# plt.ylim(0, 17999)
 # plt.xticks(fontsize=fontsize)
 # plt.yticks(fontsize=fontsize)
 # plt.xlabel("J", fontsize=fontsize)
